@@ -18,30 +18,25 @@ func post_import(scene):
 						"door":
 							node_to_clone = Door
 					
-					if node_to_clone:
+					if node_to_clone is PackedScene:
 						var instance = node_to_clone.instance()
 						instance.set_position(object.get_position())
 						
 						# Change the properties of the instanced scene depending on the Tiled object type
 						match(type):
 							"door":
-								if object.has_meta("map"):
-									var path = object.get_meta("map")
-									var map = load(path)
-									instance.target_map = map
-								
 								if object.has_meta("width") and object.has_meta("height"):
 									var width = object.get_meta("width")
 									var height = object.get_meta("height")
 									var shape : RectangleShape2D = instance.get_node("CollisionShape2D").shape as RectangleShape2D
 									
 									# Reshape the collider to match its appearance in Tiled
-									instance.position += Vector2(width / 2.0, height / 2.0)
-									shape.set_extents(Vector2(width / 2.0, height / 2.0))
+									instance.position += Vector2(width, height) / 2.0
+									shape.set_extents(Vector2(width, height) / 2.0)
 						
 						scene.add_child(instance)
 						instance.set_owner(scene)
 				
-				layer.free()
+				layer.queue_free()
 	
 	return scene
