@@ -487,7 +487,4 @@
    </object>
   </objectgroup>
  </tile>
- <wangsets>
-  <wangset name="New Wang Set" tile="-1"/>
- </wangsets>
 </tileset>

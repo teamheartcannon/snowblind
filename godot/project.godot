@@ -26,7 +26,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Helpers="*res://autoload/Helpers.gd"
+Helpers="*res://autoload/helpers/Helpers.gd"
 
 [display]
 
@@ -34,6 +34,10 @@ window/size/width=64
 window/size/height=64
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "vnen.tiled_importer" )
 
 [importer_defaults]
 
@@ -56,6 +60,17 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+vnen.tiled_importer={
+"add_background": true,
+"collision_layer": 1,
+"custom_properties": true,
+"embed_internal_images": true,
+"image_flags": 0,
+"post_import_script": "res://maps/post_import.gd",
+"save_tiled_properties": true,
+"tile_metadata": true,
+"uv_clip": true
 }
 
 [input]
@@ -90,3 +105,7 @@ move_right={
 quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"
 quality/dynamic_fonts/use_oversampling=false
+
+[tiled_importer]
+
+enable_json_format=false
