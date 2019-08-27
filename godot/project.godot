@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Game",
+"language": "GDScript",
+"path": "res://Game.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://characters/player/Player.gd"
 } ]
 _global_script_class_icons={
+"Game": "",
 "Player": ""
 }
 
@@ -27,6 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Helpers="*res://autoload/helpers/Helpers.gd"
+SceneChanger="*res://autoload/scene_changer/SceneChanger.tscn"
 
 [display]
 

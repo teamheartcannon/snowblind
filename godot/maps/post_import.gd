@@ -24,7 +24,7 @@ func post_import(scene):
 						# Change the properties of the instanced scene depending on the Tiled object type
 						match(type):
 							"door":
-								if object.has_meta("width") and object.has_meta("type"):
+								if object.has_meta("width") and object.has_meta("height"):
 									var width = object.get_meta("width")
 									var height = object.get_meta("height")
 									var shape : RectangleShape2D = instance.get_node("CollisionShape2D").shape as RectangleShape2D

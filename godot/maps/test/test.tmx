@@ -106,6 +106,10 @@
 </data>
  </layer>
  <objectgroup id="2" name="Portals">
-  <object id="3" name="Test Door" type="door" x="144" y="163" width="32" height="21.25"/>
+  <object id="3" name="Test Door" type="door" x="144" y="163" width="32" height="21.25">
+   <properties>
+    <property name="transition" value="fade"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -1,6 +1,7 @@
 extends Area2D
 
-export(String, FILE, "*.tscn") var target_scene = "res://Game.tscn"
+export(String, FILE, "*.tmx") var target_map = "res://maps/test/test.tmx"
+export(Vector2) var target_location = Vector2.ZERO
 
 const Player = preload("res://characters/player/Player.gd")
 
@@ -9,4 +10,5 @@ func _ready():
 
 func _on_Area2D_body_entered(body):
 	if body is Player:
-		get_tree().change_scene(target_scene)
+		SceneChanger.change_map(target_map)
+		body.set_position(target_location)
