@@ -7,12 +7,13 @@ func post_import(scene):
 	for layer in scene.get_children():
 		if layer is TileMap:
 			pass
-		if layer is Node2D:
+		elif layer is Node2D:
 			for object in layer.get_children():
 				if object.has_meta("type"):
 					var type = object.get_meta("type")
 					var node_to_clone = null
 					
+					# Change the type of node that will be spawned in based on the Type property in Tiled
 					match(type):
 						"door":
 							node_to_clone = Door
@@ -24,6 +25,11 @@ func post_import(scene):
 						# Change the properties of the instanced scene depending on the Tiled object type
 						match(type):
 							"door":
+								if object.has_meta("map"):
+									var path = object.get_meta("map")
+									var map = load(path)
+									instance.target_map = map
+								
 								if object.has_meta("width") and object.has_meta("height"):
 									var width = object.get_meta("width")
 									var height = object.get_meta("height")
