@@ -1,7 +1,10 @@
 extends Area2D
 
-export(String, FILE, "*.tmx") var target_map = "res://maps/test/test.tmx"
+class_name Door
+
+export(String) var target_map = "default"
 export(Vector2) var target_location = Vector2.ZERO
+export(bool) var closed = false
 
 const Player = preload("res://characters/player/Player.gd")
 

@@ -1,0 +1,4 @@
+{
+	"default": "res://maps/default/default.tmx",
+	"test": "res://maps/test/test.tmx"
+}
