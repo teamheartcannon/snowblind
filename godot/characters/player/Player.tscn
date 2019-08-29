@@ -20,4 +20,3 @@ current = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Inventory" parent="CanvasLayer" instance=ExtResource( 4 )]
-visible = false
