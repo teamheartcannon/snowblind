@@ -14,3 +14,4 @@ move_speed = 64.0
 z_index = -1
 
 [node name="test" parent="Maps" instance=ExtResource( 3 )]
+position = Vector2( 0, 2 )

@@ -106,16 +106,10 @@
 </data>
  </layer>
  <objectgroup id="2" name="Portals">
-  <object id="3" name="door_test_1" type="door" x="120.25" y="168.25" width="55.75" height="16">
+  <object id="3" name="door_test_1" type="door" x="151.75" y="160" width="24.25" height="24.25">
    <properties>
     <property name="door" value="door_test"/>
-    <property name="map" value="test"/>
-   </properties>
-  </object>
-  <object id="7" name="door_test_1" type="door" x="56" y="168.5" width="55.75" height="16">
-   <properties>
-    <property name="door" value="door_test"/>
-    <property name="map" value="test"/>
+    <property name="map" value="default"/>
    </properties>
   </object>
  </objectgroup>
