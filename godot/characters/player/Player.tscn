@@ -17,4 +17,7 @@ shape = ExtResource( 3 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="Inventory" parent="." instance=ExtResource( 4 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource( 4 )]
+visible = false

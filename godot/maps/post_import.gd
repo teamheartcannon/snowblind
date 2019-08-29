@@ -1,7 +1,7 @@
 extends Node
 
 # Object types
-const Door = preload("res://doors/Door.tscn")
+const Door = preload("res://props/door/Door.tscn")
 
 func post_import(scene):
 	for layer in scene.get_children():

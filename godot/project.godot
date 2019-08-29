@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Door",
 "language": "GDScript",
-"path": "res://doors/Door.gd"
+"path": "res://props/door/Door.gd"
 }, {
 "base": "Node2D",
 "class": "Game",
@@ -46,7 +46,7 @@ SceneChanger="*res://autoload/scene_changer/SceneChanger.tscn"
 window/size/width=64
 window/size/height=64
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
