@@ -1,8 +1,47 @@
-[gd_resource type="Theme" load_steps=2 format=2]
+[gd_resource type="Theme" load_steps=13 format=2]
 
 [ext_resource path="res://fonts/m3x6/m3x6.tres" type="DynamicFont" id=1]
 
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxTexture" id=4]
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.87451, 0.941176, 0.94902, 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
 [resource]
 default_font = ExtResource( 1 )
+Button/styles/hover = SubResource( 6 )
+Button/styles/normal = SubResource( 1 )
+Button/styles/pressed = SubResource( 7 )
+HScrollBar/styles/grabber = SubResource( 5 )
+HScrollBar/styles/scroll = SubResource( 2 )
+HScrollBar/styles/scroll_focus = SubResource( 3 )
 Label/fonts/font = null
-PanelContainer/styles/panel = null
+PanelContainer/styles/panel = SubResource( 4 )
+VScrollBar/styles/grabber = SubResource( 8 )
+VScrollBar/styles/grabber_highlight = SubResource( 9 )
+VScrollBar/styles/grabber_pressed = SubResource( 10 )
+VScrollBar/styles/scroll = SubResource( 11 )

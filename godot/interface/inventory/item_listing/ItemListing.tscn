@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="ItemListing" type="Button"]
+margin_right = 28.0
+margin_bottom = 8.0
+text = "Example"
+align = 0
