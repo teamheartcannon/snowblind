@@ -1,7 +1,7 @@
 extends Control
 
 onready var animation_player : AnimationPlayer = $AnimationPlayer
-onready var item_display : VBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/ScrollContainer/VBoxContainer
+onready var item_display : VBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ItemPanel/ScrollContainer/VBoxContainer
 onready var item_listing = preload("res://interface/inventory/item_listing/ItemListing.tscn")
 
 var items = Helpers.get_file_as_json("res://data/items.json")
@@ -10,8 +10,9 @@ var contents = {}
 signal contents_changed
 
 func _ready():
-	item_display.get_child(0).grab_click_focus()
-	item_display.get_child(0).grab_focus()
+	if item_display.get_child_count() > 0:
+		item_display.get_child(0).grab_focus()
+	
 	connect("contents_changed", self, "_on_Inventory_contents_changed")
 
 func _process(delta):
