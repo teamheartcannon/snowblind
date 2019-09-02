@@ -15,7 +15,7 @@ onready var move_acceleration = move_speed / move_start_time
 onready var move_friction = move_speed / move_stop_time
 var move_velocity : Vector2
 
-var direction : Vector2
+var direction : Vector2 = Vector2.DOWN
 
 export var reach = 4.0
 
@@ -34,6 +34,7 @@ func _process(delta):
 		State.Normal:
 			handle_movement(delta)
 			handle_direction()
+			handle_interaction()
 	
 	if debug.visible:
 		debug_display_label_direction.text = str(direction)
@@ -42,33 +43,42 @@ func _process(delta):
 		debug_display_label_state.text = str(state)
 
 func handle_movement(delta):
-	var input_direction = Vector2.ZERO
-	
 	# Horizontal
 	if Input.is_action_pressed("move_left"):
 		move_velocity.x = Helpers.approach(move_velocity.x, -move_speed, move_acceleration * delta)
-		input_direction.x -= 1
 	elif Input.is_action_pressed("move_right"):
 		move_velocity.x = Helpers.approach(move_velocity.x, move_speed, move_acceleration * delta)
-		input_direction.x += 1
 	else:
 		move_velocity.x = Helpers.approach(move_velocity.x, 0.0, move_friction * delta)
 	
 	# Vertical
 	if Input.is_action_pressed("move_up"):
 		move_velocity.y = Helpers.approach(move_velocity.y, -move_speed, move_acceleration * delta)
-		input_direction.y -= 1
 	elif Input.is_action_pressed("move_down"):
 		move_velocity.y = Helpers.approach(move_velocity.y, move_speed, move_acceleration * delta)
-		input_direction.y += 1
 	else:
 		move_velocity.y = Helpers.approach(move_velocity.y, 0.0, move_friction * delta)
 	
 	# Apply the forces to the player
 	move_and_slide(move_velocity)
+
+func handle_direction():
+	var input_direction = Vector2.ZERO
+	
+	# Horizontal
+	if Input.is_action_pressed("move_left"):
+		input_direction.x -= 1
+	elif Input.is_action_pressed("move_right"):
+		input_direction.x += 1
+	
+	# Vertical
+	if Input.is_action_pressed("move_up"):
+		input_direction.y -= 1
+	elif Input.is_action_pressed("move_down"):
+		input_direction.y += 1
 	
 	if input_direction != Vector2.ZERO:
 		direction = input_direction
 
-func handle_direction():
+func handle_interaction():
 	pass
