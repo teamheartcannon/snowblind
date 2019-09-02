@@ -152,6 +152,12 @@ margin_right = 20.0
 margin_bottom = 20.0
 texture = ExtResource( 3 )
 
+[node name="ItemPreview" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 20.0
+margin_bottom = 44.0
+texture = ExtResource( 3 )
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 24.0
 margin_right = 56.0

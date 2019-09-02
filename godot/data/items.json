@@ -2,6 +2,7 @@
 	"example": {
 		"name": "Example",
 		"description": "A placeholder item used for testing purposes. How did you obtain this?",
+		"icon": "res://items/example/item_unknown_icon.png",
 		"commands": [
 			"res://items/commands/examine/ExamineCommand.tscn"
 		]

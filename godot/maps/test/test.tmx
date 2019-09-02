@@ -112,7 +112,7 @@
     <property name="map" value="test"/>
    </properties>
   </object>
-  <object id="8" name="pickup_test_1" type="pickup" x="88" y="97.75">
+  <object id="8" name="pickup_test_1" type="pickup" x="41.5" y="41.75">
    <properties>
     <property name="item" value="example"/>
     <property name="quantity" type="int" value="1"/>
