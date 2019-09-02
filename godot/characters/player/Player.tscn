@@ -25,7 +25,7 @@ current = true
 [node name="Inventory" parent="InventoryLayer" instance=ExtResource( 4 )]
 
 [node name="DebugLayer" type="CanvasLayer" parent="."]
-layer = 2
+layer = 99
 
 [node name="DebugOverlay" type="Control" parent="DebugLayer"]
 editor/display_folded = true

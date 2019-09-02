@@ -22,6 +22,11 @@ func _process(delta):
 			hide()
 		else:
 			show()
+			
+			if item_display.get_child_count() > 0:
+				var listing = item_display.get_child(0)
+				listing.grab_focus()
+				listing.grab_click_focus()
 
 func _on_Inventory_contents_changed():
 	update_item_list()

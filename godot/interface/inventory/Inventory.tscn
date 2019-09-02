@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://themes/inventory/inventory.tres" type="Theme" id=1]
 [ext_resource path="res://interface/inventory/Inventory.gd" type="Script" id=2]
 [ext_resource path="res://interface/inventory/health_display/health_display1.png" type="Texture" id=3]
+[ext_resource path="res://items/commands/examine/ExamineCommand.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "hide"
@@ -19,7 +20,7 @@ tracks/0/keys = {
 "values": [ true, false, false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/1/path = NodePath("EffectsLayer/ColorRect:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -31,7 +32,7 @@ tracks/1/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("CanvasLayer/ColorRect:visible")
+tracks/2/path = NodePath("EffectsLayer/ColorRect:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -70,7 +71,7 @@ tracks/0/keys = {
 "values": [ false, true, true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CanvasLayer/ColorRect:visible")
+tracks/1/path = NodePath("EffectsLayer/ColorRect:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -82,7 +83,7 @@ tracks/1/keys = {
 "values": [ true, true, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/2/path = NodePath("EffectsLayer/ColorRect:color")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -188,25 +189,36 @@ size_flags_vertical = 3
 
 [node name="CommandPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 visible = false
-margin_top = 29.0
+margin_top = 30.0
 margin_right = 32.0
-margin_bottom = 55.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CommandPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CommandPanel"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 31.0
 margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CommandPanel/ScrollContainer"]
+margin_right = 30.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ExamineCommand" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CommandPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 4 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hide = SubResource( 1 )
 anims/show = SubResource( 2 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="EffectsLayer" type="CanvasLayer" parent="."]
+layer = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="EffectsLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0 )
