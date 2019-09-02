@@ -41,7 +41,7 @@ func post_import(scene):
 							instance.item = object.get_meta("item")
 						
 						if object.has_meta("quantity"):
-							instance.item = object.get_meta("quantity")
+							instance.quantity = object.get_meta("quantity")
 				
 				if instance != null:
 					scene.add_child(instance)

@@ -14,10 +14,11 @@ export var move_speed = 16.0 # In pixels-per-second
 onready var move_acceleration = move_speed / move_start_time
 onready var move_friction = move_speed / move_stop_time
 var move_velocity : Vector2
-
 var direction : Vector2 = Vector2.DOWN
 
 export var reach = 4.0
+
+onready var inventory = $InventoryLayer/Inventory
 
 enum State {
 	Normal
@@ -35,6 +36,9 @@ func _process(delta):
 			handle_movement(delta)
 			handle_direction()
 			handle_interaction()
+	
+	if Input.is_action_just_pressed("ui_debug"):
+		debug.visible = not debug.visible
 	
 	if debug.visible:
 		debug_display_label_direction.text = str(direction)
@@ -81,4 +85,16 @@ func handle_direction():
 		direction = input_direction
 
 func handle_interaction():
-	pass
+	if Input.is_action_just_pressed("interact"):
+		var direct_space_state : Physics2DDirectSpaceState = get_world_2d().direct_space_state
+		var result = direct_space_state.intersect_ray(
+			position, # From
+			position + (direction * reach), # To
+			[ self ] # Collision exceptions
+		)
+		
+		if result.size() > 0:
+			var target = result["collider"]
+			
+			if target.has_method("interact"):
+				target.interact(self)

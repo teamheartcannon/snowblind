@@ -1,17 +1,18 @@
-extends Area2D
+extends StaticBody2D
 
 class_name Pickup
+
+const Player = preload("res://characters/player/Player.gd")
 
 export(String) var item = "example"
 export(int) var quantity = 1
 
 signal picked_up
 
-func ready():
-	connect("picked_up", self, "_on_Pickup_picked_up")
-
-func interact():
+func interact(entity):
 	emit_signal("picked_up")
-
-func _on_Pickup_picked_up():
-	queue_free()
+	
+	if entity is Player:
+		entity.inventory.insert_item(item, quantity)
+		
+		queue_free()

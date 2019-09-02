@@ -59,6 +59,6 @@ func update_item_list():
 	
 	for item in contents.keys():
 		var instance = item_listing.instance()
-		instance.key = item
+		instance.text = items[item]["name"]
 		
 		item_display.add_child(instance)
