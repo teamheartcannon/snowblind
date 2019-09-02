@@ -2,6 +2,7 @@ extends Node
 
 # Object types
 const Door = preload("res://props/door/Door.tscn")
+const Pickup = preload("res://props/pickup/Pickup.tscn")
 
 func post_import(scene):
 	for layer in scene.get_children():
@@ -31,6 +32,16 @@ func post_import(scene):
 						
 						if object.has_meta("map"):
 							instance.target_map = object.get_meta("map")
+					
+					"pickup":
+						instance = Pickup.instance()
+						instance.set_position(object.get_position())
+						
+						if object.has_meta("item"):
+							instance.item = object.get_meta("item")
+						
+						if object.has_meta("quantity"):
+							instance.item = object.get_meta("quantity")
 				
 				if instance != null:
 					scene.add_child(instance)

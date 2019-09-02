@@ -5,7 +5,7 @@ extends Node
 onready var map_root = get_tree().root.get_node("/root/Game/Maps")
 onready var maps = Helpers.get_file_as_json("res://data/maps.json")
 
-func change_map(key, transition=null, delay=0.0):
+func change_map(key, delay=0.0):
 	assert(maps.has(key))
 	assert(delay >= 0.0)
 	
