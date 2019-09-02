@@ -94,19 +94,18 @@ margin_bottom = 8.0
 text = "State.Normal"
 
 [node name="DirectionDisplay" type="HBoxContainer" parent="DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer"]
-visible = false
-margin_top = 12.0
+margin_top = 36.0
 margin_right = 64.0
-margin_bottom = 20.0
+margin_bottom = 44.0
 
 [node name="Label" type="Label" parent="DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/DirectionDisplay"]
-margin_right = 34.0
+margin_right = 4.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 6 )
-text = "Direction:"
+text = "d"
 
 [node name="Label2" type="Label" parent="DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/DirectionDisplay"]
-margin_left = 38.0
-margin_right = 59.0
+margin_left = 8.0
+margin_right = 29.0
 margin_bottom = 8.0
 text = "(0, 0)"
