@@ -1,8 +1,10 @@
 extends Button
 
 var item = "example" # The key of the item in the global items database
+var quantity = 1
 
-onready var item_preview : TextureRect = get_node("../../../../../VBoxContainer/ItemPreview")
+onready var item_preview_icon : TextureRect = get_node("../../../../../VBoxContainer/ItemPreview/Icon")
+onready var item_preview_quantity : Label = get_node("../../../../../VBoxContainer/ItemPreview/Quantity")
 onready var item_command_panel = get_node("../../../../CommandPanel")
 onready var item_list : VBoxContainer = get_node("../../../../ItemPanel/ScrollContainer/VBoxContainer")
 
@@ -11,6 +13,8 @@ func _ready():
 
 func _on_CancelButton_down():
 	item_command_panel.visible = false
+	item_preview_icon.texture = null
+	item_preview_quantity.text = ""
 	
 	for listing in item_list.get_children():
 		if listing.item == item:
@@ -40,4 +44,7 @@ func _on_Button_down():
 			command_box.add_child(command_listing)
 
 	if Global.database["items"][item].has("icon"):
-		item_preview.texture = load(Global.database["items"][item]["icon"])
+		item_preview_icon.texture = load(Global.database["items"][item]["icon"])
+	
+	if quantity > 1:
+		item_preview_quantity.text = str(quantity)

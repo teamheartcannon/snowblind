@@ -1,7 +1,7 @@
 extends Control
 
 onready var animation_player : AnimationPlayer = $AnimationPlayer
-onready var item_display : VBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ItemPanel/ScrollContainer/VBoxContainer
+onready var item_display_list : VBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ItemPanel/ScrollContainer/VBoxContainer
 onready var item_listing = preload("res://interface/inventory/item_listing/ItemListing.tscn")
 
 var items = Helpers.get_file_as_json("res://data/items.json")
@@ -10,10 +10,12 @@ var contents = {}
 signal contents_changed
 
 func _ready():
-	if item_display.get_child_count() > 0:
-		item_display.get_child(0).grab_focus()
+	if item_display_list.get_child_count() > 0:
+		item_display_list.get_child(0).grab_focus()
 	
 	connect("contents_changed", self, "_on_Inventory_contents_changed")
+	
+	update_item_list()
 
 func _process(delta):
 	# Allow the inventory to be opened and closed
@@ -23,8 +25,8 @@ func _process(delta):
 		else:
 			show()
 			
-			if item_display.get_child_count() > 0:
-				var listing = item_display.get_child(0)
+			if item_display_list.get_child_count() > 0:
+				var listing = item_display_list.get_child(0)
 				listing.grab_focus()
 				listing.grab_click_focus()
 
@@ -58,12 +60,19 @@ func remove_item(key, quantity=1):
 	emit_signal("contents_changed")
 
 func update_item_list():
-	if item_display.get_child_count() > 0:
-		for listing in item_display.get_children():
+	if item_display_list.get_child_count() > 0:
+		for listing in item_display_list.get_children():
 			listing.queue_free()
 	
-	for item in contents.keys():
-		var instance = item_listing.instance()
-		instance.text = items[item]["name"]
-		
-		item_display.add_child(instance)
+	if contents.size() > 0:
+		for item in contents.keys():
+			var instance = item_listing.instance()
+			instance.text = items[item]["name"]
+			instance.item = item
+			instance.quantity = contents[item]
+			
+			item_display_list.add_child(instance)
+	else:
+		var label = Label.new()
+		label.text = "Empty"
+		item_display_list.add_child(label)
