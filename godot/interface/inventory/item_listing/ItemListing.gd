@@ -3,31 +3,28 @@ extends Button
 var item = "example" # The key of the item in the global items database
 var quantity = 1
 
-onready var item_preview_icon : TextureRect = get_node("../../../../../VBoxContainer/ItemPreview/Icon")
-onready var item_preview_quantity : Label = get_node("../../../../../VBoxContainer/ItemPreview/Quantity")
-onready var item_command_panel = get_node("../../../../CommandPanel")
-onready var item_list : VBoxContainer = get_node("../../../../ItemPanel/ScrollContainer/VBoxContainer")
+var inventory = null
 
 func _ready():
+	assert(inventory != null)
+	
 	connect("button_down", self, "_on_Button_down")
 
 func _on_CancelButton_down():
-	item_command_panel.visible = false
-	item_preview_icon.texture = null
-	item_preview_quantity.text = ""
+	inventory.item_command_panel.visible = false
+	inventory.item_preview_icon.texture = null
+	inventory.item_preview_quantity.text = ""
 	
-	for listing in item_list.get_children():
+	for listing in inventory.inventory_contents_box.get_children():
 		if listing.item == item:
 			listing.grab_focus()
 
 func _on_Button_down():
-	if not item_command_panel.visible:
-		item_command_panel.visible = true
+	if not inventory.item_command_panel.visible:
+		inventory.item_command_panel.visible = true
 	
-	var command_box = item_command_panel.get_node("ScrollContainer/VBoxContainer")
-	
-	if command_box.get_child_count() > 0:
-		for command in command_box.get_children():
+	if inventory.item_commands_box.get_child_count() > 0:
+		for command in inventory.item_commands_panel.get_children():
 			command.queue_free()
 	
 	# Add the option to cancel the command
@@ -35,16 +32,17 @@ func _on_Button_down():
 	button_cancel.text = "Cancel"
 	button_cancel.align = ALIGN_LEFT
 	button_cancel.connect("button_down", self, "_on_CancelButton_down")
-	command_box.add_child(button_cancel)
+	inventory.item_commands_box.add_child(button_cancel)
 	button_cancel.grab_focus()
 	
 	if Global.database["items"][item].has("commands"):
 		for command in Global.database["items"][item]["commands"]:
 			var command_listing = load(command).instance()
-			command_box.add_child(command_listing)
+			command_listing.inventory = inventory
+			inventory.item_commands_box.add_child(command_listing)
 
 	if Global.database["items"][item].has("icon"):
-		item_preview_icon.texture = load(Global.database["items"][item]["icon"])
+		inventory.item_preview_icon.texture = load(Global.database["items"][item]["icon"])
 	
 	if quantity > 1:
-		item_preview_quantity.text = str(quantity)
+		inventory.item_preview_quantity.text = str(quantity)

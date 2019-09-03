@@ -1,8 +1,16 @@
 extends Control
 
+const ItemListing = preload("res://interface/inventory/item_listing/ItemListing.tscn")
+
 onready var animation_player : AnimationPlayer = $AnimationPlayer
-onready var item_display_list : VBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ItemPanel/ScrollContainer/VBoxContainer
-onready var item_listing = preload("res://interface/inventory/item_listing/ItemListing.tscn")
+
+onready var inventory_contents_box : VBoxContainer = $MainScreen/VBoxContainer/HBoxContainer/RightContainer/ItemPanel/ScrollContainer/VBoxContainer
+
+onready var item_examine_panel = $ExaminePanel
+onready var item_preview_icon : TextureRect = $MainScreen/VBoxContainer/HBoxContainer/LeftContainer/ItemPreview/Icon
+onready var item_preview_quantity : Label = $MainScreen/VBoxContainer/HBoxContainer/LeftContainer/ItemPreview/Quantity
+onready var item_command_panel : PanelContainer = $MainScreen/VBoxContainer/HBoxContainer/RightContainer/CommandPanel
+onready var item_commands_box : VBoxContainer = $MainScreen/VBoxContainer/HBoxContainer/RightContainer/CommandPanel/ScrollContainer/VBoxContainer
 
 var items = Helpers.get_file_as_json("res://data/items.json")
 var contents = {}
@@ -10,8 +18,8 @@ var contents = {}
 signal contents_changed
 
 func _ready():
-	if item_display_list.get_child_count() > 0:
-		item_display_list.get_child(0).grab_focus()
+	if inventory_contents_box.get_child_count() > 0:
+		inventory_contents_box.get_child(0).grab_focus()
 	
 	connect("contents_changed", self, "_on_Inventory_contents_changed")
 	
@@ -25,8 +33,8 @@ func _process(delta):
 		else:
 			show()
 			
-			if item_display_list.get_child_count() > 0:
-				var listing = item_display_list.get_child(0)
+			if inventory_contents_box.get_child_count() > 0:
+				var listing = inventory_contents_box.get_child(0)
 				listing.grab_focus()
 				listing.grab_click_focus()
 
@@ -60,19 +68,20 @@ func remove_item(key, quantity=1):
 	emit_signal("contents_changed")
 
 func update_item_list():
-	if item_display_list.get_child_count() > 0:
-		for listing in item_display_list.get_children():
+	if inventory_contents_box.get_child_count() > 0:
+		for listing in inventory_contents_box.get_children():
 			listing.queue_free()
 	
 	if contents.size() > 0:
 		for item in contents.keys():
-			var instance = item_listing.instance()
+			var instance = ItemListing.instance()
 			instance.text = items[item]["name"]
 			instance.item = item
 			instance.quantity = contents[item]
+			instance.inventory = self
 			
-			item_display_list.add_child(instance)
+			inventory_contents_box.add_child(instance)
 	else:
 		var label = Label.new()
 		label.text = "Empty"
-		item_display_list.add_child(label)
+		inventory_contents_box.add_child(label)

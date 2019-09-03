@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=2]
+[gd_resource type="Theme" load_steps=15 format=2]
 
 [ext_resource path="res://themes/inventory/dark_nine_patch.png" type="Texture" id=1]
 [ext_resource path="res://fonts/m3x6/m3x6.tres" type="DynamicFont" id=2]
@@ -16,7 +16,17 @@ bg_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
-[sub_resource type="StyleBoxTexture" id=7]
+[sub_resource type="StyleBoxEmpty" id=12]
+content_margin_left = 1.0
+content_margin_right = 1.0
+content_margin_top = 1.0
+content_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id=13]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 4, 4 )
 margin_left = 1.0
@@ -47,8 +57,9 @@ HScrollBar/styles/grabber = SubResource( 4 )
 HScrollBar/styles/scroll = SubResource( 5 )
 HScrollBar/styles/scroll_focus = SubResource( 6 )
 Label/fonts/font = null
-Panel/styles/panel = null
-PanelContainer/styles/panel = SubResource( 7 )
+MarginContainer/constants/margin_right = 0
+Panel/styles/panel = SubResource( 12 )
+PanelContainer/styles/panel = SubResource( 13 )
 VScrollBar/styles/grabber = SubResource( 8 )
 VScrollBar/styles/grabber_highlight = SubResource( 9 )
 VScrollBar/styles/grabber_pressed = SubResource( 10 )
