@@ -1,7 +1,6 @@
 extends Button
 
-onready var items = Helpers.get_file_as_json("res://data/items.json")
-var item = "example"
+var item = "example" # The key of the item in the global items database
 
 onready var item_preview : TextureRect = get_node("../../../../../VBoxContainer/ItemPreview")
 onready var item_command_panel = get_node("../../../../CommandPanel")
@@ -35,10 +34,10 @@ func _on_Button_down():
 	command_box.add_child(button_cancel)
 	button_cancel.grab_focus()
 	
-	if items[item].has("commands"):
-		for command in items[item]["commands"]:
+	if Global.database["items"][item].has("commands"):
+		for command in Global.database["items"][item]["commands"]:
 			var command_listing = load(command).instance()
 			command_box.add_child(command_listing)
 
-	if items[item].has("icon"):
-		item_preview.texture = load(items[item]["icon"])
+	if Global.database["items"][item].has("icon"):
+		item_preview.texture = load(Global.database["items"][item]["icon"])

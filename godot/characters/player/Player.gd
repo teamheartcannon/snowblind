@@ -19,6 +19,7 @@ var direction : Vector2 = Vector2.DOWN
 export var reach = 4.0
 
 onready var inventory = $InventoryLayer/Inventory
+var equipment = null
 
 enum State {
 	Normal

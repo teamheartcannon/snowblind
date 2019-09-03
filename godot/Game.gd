@@ -3,7 +3,7 @@ extends Node2D
 class_name Game
 
 func _ready():
-	var window_width = 1024
+	var window_width = 768
 	var window_height = 768
 	
 	OS.window_size = Vector2(window_width, window_height)

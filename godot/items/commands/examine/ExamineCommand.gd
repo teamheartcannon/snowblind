@@ -1,6 +1,5 @@
 extends Button
 
-onready var items = Helpers.get_file_as_json("res://data/items.json")
 var item = "example"
 
 func _ready():
@@ -10,5 +9,5 @@ func _on_ExamineCommand_button_down():
 	execute()
 
 func execute():
-	if items[item].has("description"):
-		print(items[item]["description"])
+	if Global.database["items"][item].has("description"):
+		print(Global.database["items"][item]["description"])

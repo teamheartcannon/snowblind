@@ -46,6 +46,12 @@ config/icon="res://icon.png"
 
 Helpers="*res://autoload/helpers/Helpers.gd"
 SceneChanger="*res://autoload/scene_changer/SceneChanger.tscn"
+Global="*res://autoload/Global.gd"
+
+[debug]
+
+gdscript/warnings/unused_class_variable=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 
