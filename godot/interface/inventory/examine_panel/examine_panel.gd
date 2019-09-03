@@ -1,3 +1,0 @@
-extends PanelContainer
-
-var inventory

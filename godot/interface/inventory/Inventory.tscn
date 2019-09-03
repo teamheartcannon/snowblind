@@ -3,7 +3,7 @@
 [ext_resource path="res://themes/inventory/inventory.tres" type="Theme" id=1]
 [ext_resource path="res://interface/inventory/Inventory.gd" type="Script" id=2]
 [ext_resource path="res://interface/inventory/health_display/health_display1.png" type="Texture" id=3]
-[ext_resource path="res://interface/inventory/examine_panel/examine_panel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://interface/inventory/examine_panel/ExaminePanel.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "hide"
