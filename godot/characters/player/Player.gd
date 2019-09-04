@@ -10,7 +10,11 @@ onready var debug_display_label_state = debug_overlay.get_node("HBoxContainer/VB
 
 export var move_start_time = 0.1 # In seconds
 export var move_stop_time = 0.2 # In seconds
-export var move_speed = 16.0 # In pixels-per-second
+export(Dictionary) var move_speeds = {
+	State.Normal: 16.0,
+	State.Aiming: 8.0
+}
+var move_speed = move_speeds[State.Normal] # In pixels-per-second
 onready var move_acceleration = move_speed / move_start_time
 onready var move_friction = move_speed / move_stop_time
 var move_velocity : Vector2
@@ -19,7 +23,7 @@ var direction : Vector2 = Vector2.DOWN
 export var pickup_reach = 4.0
 
 onready var inventory = $InventoryLayer/Inventory
-var equipment = null
+onready var equipment = $Equipment
 
 enum State {
 	Normal,
@@ -42,32 +46,19 @@ func _process(delta):
 			handle_direction()
 			handle_interaction()
 			
-			if Input.is_action_pressed("combat_aim"):
-				transition(State.Aiming)
+			if equipment.item != null:
+				if Input.is_action_pressed("combat_aim"):
+					transition(State.Aiming)
+		State.Aiming:
+			handle_movement(delta)
+			
+			if not Input.is_action_pressed("combat_aim"):
+				transition(State.Normal)
+			
+			if Input.is_action_just_pressed("combat_attack"):
+				equipment.use()
 	
 	handle_debugging()
-
-func transition(new_state):
-	match(new_state):
-		State.Normal:
-			pass
-		State.Aiming:
-			pass
-		State.Reloading:
-			pass
-	
-	state = new_state
-
-func equip(item):
-	assert(Global.database["items"].has(item))
-	assert(Global.database["items"][item].has("commands"))
-	assert(Global.database["items"][item]["commands"].has("res://item/commands/equip/EquipCommand.tscn"))
-	
-	equipment = Global.database["items"][item]
-	equipment["key"] = item # Remember the key to access the dictionary later
-	
-	# Let the rest of the game know which item the player equipped
-	emit_signal("equipment_changed", item)
 
 func handle_debugging():
 	if Input.is_action_just_pressed("ui_debug"):
@@ -131,3 +122,23 @@ func handle_interaction():
 			
 			if target.has_method("interact"):
 				target.interact(self)
+
+func handle_attacking():
+	pass
+
+func transition(new_state):
+	if move_speeds.has(new_state):
+		move_speed = move_speeds[new_state]
+	
+	state = new_state
+
+func equip(item):
+	assert(Global.database["items"].has(item))
+	assert(Global.database["items"][item].has("commands"))
+	assert(Global.database["items"][item]["commands"].has("res://item/commands/equip/EquipCommand.tscn"))
+	
+	equipment.metadata = Global.database["items"][item]
+	equipment.item = item
+	
+	# Let the rest of the game know which item the player equipped
+	emit_signal("equipment_changed", item)

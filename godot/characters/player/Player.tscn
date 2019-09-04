@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://characters/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://characters/player/player.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://interface/inventory/Inventory.tscn" type="PackedScene" id=4]
 [ext_resource path="res://themes/debug/debug.tres" type="Theme" id=5]
 [ext_resource path="res://fonts/m3x6/m3x6.tres" type="DynamicFont" id=6]
+[ext_resource path="res://characters/player/equipment/Equipment.tscn" type="PackedScene" id=7]
+[ext_resource path="res://characters/player/equipment/Equipment.gd" type="Script" id=8]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -112,3 +114,6 @@ margin_left = 8.0
 margin_right = 29.0
 margin_bottom = 8.0
 text = "(0, 0)"
+
+[node name="Equipment" parent="." instance=ExtResource( 7 )]
+script = ExtResource( 8 )
