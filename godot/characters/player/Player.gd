@@ -132,8 +132,7 @@ func transition(new_state):
 	
 	match(new_state):
 		State.Aiming:
-			equipment.direction = direction
-			equipment.position = (direction * pickup_reach)
+			equipment.global_position = global_position + (direction * pickup_reach)
 	
 	state = new_state
 
