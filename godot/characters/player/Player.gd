@@ -130,6 +130,11 @@ func transition(new_state):
 	if move_speeds.has(new_state):
 		move_speed = move_speeds[new_state]
 	
+	match(new_state):
+		State.Aiming:
+			equipment.direction = direction
+			equipment.position = (direction * pickup_reach)
+	
 	state = new_state
 
 func equip(item):
