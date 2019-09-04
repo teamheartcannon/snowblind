@@ -12,10 +12,13 @@ export(int) var quantity = 1
 signal picked_up
 
 func _ready():
+	assert(Global.database["items"].has(item))
+	
 	connect("picked_up", self, "_on_Pickup_picked_up")
 	
-	if Global.database["items"][item].has("sprite"):
-		sprite.texture = load(Global.database["items"][item]["sprite"])
+	if Global.database["items"][item].has("images"):
+		if Global.database["items"][item]["images"].has("pickup"):
+			sprite.texture = load(Global.database["items"][item]["images"]["pickup"])
 
 func _on_Pickup_picked_up():
 	queue_free()

@@ -2,11 +2,11 @@ extends KinematicBody2D
 
 class_name Player
 
-onready var debug = $DebugLayer/DebugOverlay
-onready var debug_display_label_position = $DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/PositionDisplay/Label2
-onready var debug_display_label_velocity = $DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/VelocityDisplay/Label2
-onready var debug_display_label_direction = $DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/DirectionDisplay/Label2
-onready var debug_display_label_state = $DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/StateDisplay/Label2
+onready var debug_overlay = $DebugLayer/DebugOverlay
+onready var debug_display_label_position = debug_overlay.get_node("HBoxContainer/VBoxContainer/PositionDisplay/Label2")
+onready var debug_display_label_velocity = debug_overlay.get_node("HBoxContainer/VBoxContainer/VelocityDisplay/Label2")
+onready var debug_display_label_direction = debug_overlay.get_node("HBoxContainer/VBoxContainer/DirectionDisplay/Label2")
+onready var debug_display_label_state = debug_overlay.get_node("HBoxContainer/VBoxContainer/StateDisplay/Label2")
 
 export var move_start_time = 0.1 # In seconds
 export var move_stop_time = 0.2 # In seconds
@@ -16,15 +16,19 @@ onready var move_friction = move_speed / move_stop_time
 var move_velocity : Vector2
 var direction : Vector2 = Vector2.DOWN
 
-export var reach = 4.0
+export var pickup_reach = 4.0
 
 onready var inventory = $InventoryLayer/Inventory
 var equipment = null
 
 enum State {
-	Normal
+	Normal,
+	Aiming,
+	Reloading
 }
 var state = State.Normal
+
+signal equipment_changed
 
 func _ready():
 	assert(move_start_time > 0.0)
@@ -37,11 +41,39 @@ func _process(delta):
 			handle_movement(delta)
 			handle_direction()
 			handle_interaction()
+			
+			if Input.is_action_pressed("combat_aim"):
+				transition(State.Aiming)
 	
+	handle_debugging()
+
+func transition(new_state):
+	match(new_state):
+		State.Normal:
+			pass
+		State.Aiming:
+			pass
+		State.Reloading:
+			pass
+	
+	state = new_state
+
+func equip(item):
+	assert(Global.database["items"].has(item))
+	assert(Global.database["items"][item].has("commands"))
+	assert(Global.database["items"][item]["commands"].has("res://item/commands/equip/EquipCommand.tscn"))
+	
+	equipment = Global.database["items"][item]
+	equipment["key"] = item # Remember the key to access the dictionary later
+	
+	# Let the rest of the game know which item the player equipped
+	emit_signal("equipment_changed", item)
+
+func handle_debugging():
 	if Input.is_action_just_pressed("ui_debug"):
-		debug.visible = not debug.visible
+		debug_overlay.visible = not debug_overlay.visible
 	
-	if debug.visible:
+	if debug_overlay.visible:
 		debug_display_label_direction.text = str(direction)
 		debug_display_label_position.text = str(position)
 		debug_display_label_velocity.text = str(move_velocity)
@@ -90,7 +122,7 @@ func handle_interaction():
 		var direct_space_state : Physics2DDirectSpaceState = get_world_2d().direct_space_state
 		var result = direct_space_state.intersect_ray(
 			position, # From
-			position + (direction * reach), # To
+			position + (direction * pickup_reach), # To
 			[ self ] # Collision exceptions
 		)
 		

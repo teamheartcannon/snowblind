@@ -24,7 +24,7 @@ func _on_Button_down():
 		inventory.item_command_panel.visible = true
 	
 	if inventory.item_commands_box.get_child_count() > 0:
-		for command in inventory.item_commands_panel.get_children():
+		for command in inventory.item_commands_box.get_children():
 			command.queue_free()
 	
 	# Add the option to cancel the command
@@ -38,11 +38,17 @@ func _on_Button_down():
 	if Global.database["items"][item].has("commands"):
 		for command in Global.database["items"][item]["commands"]:
 			var command_listing = load(command).instance()
+			
+			assert(command_listing != null)
+			
 			command_listing.inventory = inventory
+			command_listing.item = item
+			command_listing.quantity = quantity
 			inventory.item_commands_box.add_child(command_listing)
-
-	if Global.database["items"][item].has("icon"):
-		inventory.item_preview_icon.texture = load(Global.database["items"][item]["icon"])
+	
+	if Global.database["items"][item].has("images"):
+		if Global.database["items"][item]["images"].has("icon"):
+			inventory.item_preview_icon.texture = load(Global.database["items"][item]["images"]["icon"])
 	
 	if quantity > 1:
 		inventory.item_preview_quantity.text = str(quantity)

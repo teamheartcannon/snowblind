@@ -2,15 +2,17 @@ extends Control
 
 const ItemListing = preload("res://interface/inventory/item_listing/ItemListing.tscn")
 
+onready var player = get_tree().root.get_node("Game/Player")
+
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 onready var inventory_contents_box : VBoxContainer = $MainScreen/VBoxContainer/HBoxContainer/RightContainer/ItemPanel/ScrollContainer/VBoxContainer
-
 onready var item_examine_panel = $ExaminePanel
 onready var item_preview_icon : TextureRect = $MainScreen/VBoxContainer/HBoxContainer/LeftContainer/ItemPreview/Icon
 onready var item_preview_quantity : Label = $MainScreen/VBoxContainer/HBoxContainer/LeftContainer/ItemPreview/Quantity
 onready var item_command_panel : PanelContainer = $MainScreen/VBoxContainer/HBoxContainer/RightContainer/CommandPanel
 onready var item_commands_box : VBoxContainer = $MainScreen/VBoxContainer/HBoxContainer/RightContainer/CommandPanel/ScrollContainer/VBoxContainer
+onready var player_equipment_display : TextureRect = $MainScreen/VBoxContainer/HBoxContainer/LeftContainer/EquipmentDisplay
 
 var items = Helpers.get_file_as_json("res://data/items.json")
 var contents = {}
@@ -22,6 +24,7 @@ func _ready():
 		inventory_contents_box.get_child(0).grab_focus()
 	
 	connect("contents_changed", self, "_on_Inventory_contents_changed")
+	player.connect("equipment_changed", self, "_on_Player_equipment_changed")
 	
 	update_item_list()
 
@@ -40,6 +43,11 @@ func _process(delta):
 
 func _on_Inventory_contents_changed():
 	update_item_list()
+
+func _on_Player_equipment_changed(item):
+	if Global.database["items"][item].has("images"):
+		if Global.database["items"][item]["images"].has("icon"):
+			player_equipment_display.texture = load(Global.database["items"][item]["images"]["icon"])
 
 func show():
 	animation_player.play("show")

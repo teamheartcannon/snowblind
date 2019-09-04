@@ -3,6 +3,7 @@ extends PanelContainer
 export var scroll_speed = 4
 onready var scroll_container : ScrollContainer = $MarginContainer/HBoxContainer/VBoxContainer/BottomContainer/PanelContainer/ScrollContainer
 
+onready var item_preview : TextureRect = $MarginContainer/HBoxContainer/VBoxContainer/TopContainer/Preview
 onready var item_name_label : Label = $MarginContainer/HBoxContainer/VBoxContainer/BottomContainer/PanelContainer/ScrollContainer/VBoxContainer/Name
 onready var item_description_label : Label = $MarginContainer/HBoxContainer/VBoxContainer/BottomContainer/PanelContainer/ScrollContainer/VBoxContainer/Description
 
