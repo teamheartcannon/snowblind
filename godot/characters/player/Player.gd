@@ -126,10 +126,10 @@ func transition(new_state):
 	
 	match(new_state):
 		State.Normal:
-			equipment.drawn = false
+			equipment.state = equipment.State.Holstered
 		State.Aiming:
 			equipment.position = direction * pickup_reach
-			equipment.drawn = true
+			equipment.state = equipment.State.Drawn
 	
 	state = new_state
 
