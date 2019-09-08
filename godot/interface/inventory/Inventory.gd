@@ -15,7 +15,7 @@ onready var item_commands_box : VBoxContainer = $MainScreen/VBoxContainer/HBoxCo
 onready var player_equipment_display : TextureRect = $MainScreen/VBoxContainer/HBoxContainer/LeftContainer/EquipmentDisplay
 
 var items = Helpers.get_file_as_json("res://data/items.json")
-var contents = {}
+export(Dictionary) var contents = {}
 
 signal contents_changed
 

@@ -54,9 +54,6 @@ func _process(delta):
 			
 			if not Input.is_action_pressed("combat_aim"):
 				transition(State.Normal)
-			
-			if Input.is_action_just_pressed("combat_attack"):
-				equipment.use()
 	
 	handle_debugging()
 
@@ -123,16 +120,16 @@ func handle_interaction():
 			if target.has_method("interact"):
 				target.interact(self)
 
-func handle_attacking():
-	pass
-
 func transition(new_state):
 	if move_speeds.has(new_state):
 		move_speed = move_speeds[new_state]
 	
 	match(new_state):
+		State.Normal:
+			equipment.drawn = false
 		State.Aiming:
-			equipment.global_position = global_position + (direction * pickup_reach)
+			equipment.position = direction * pickup_reach
+			equipment.drawn = true
 	
 	state = new_state
 

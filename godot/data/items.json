@@ -43,6 +43,7 @@
 			"res://item/commands/equip/EquipCommand.tscn"
 		],
 		"range": 32.0,
+		"accuracy": 8.0,
 		"spread": 1.0,
 		"damage": {
 			"min": 25,
