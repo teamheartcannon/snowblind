@@ -38,6 +38,8 @@ func _ready():
 	assert(move_start_time > 0.0)
 	assert(move_stop_time > 0.0)
 	assert(move_speed > 0.0)
+	
+	equipment.holder = self
 
 func _process(delta):
 	match(state):
