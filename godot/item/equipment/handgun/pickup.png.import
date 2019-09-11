@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/item_unknown_icon.png-c485b8aca4265754ff53499c7e5690eb.stex"
+path="res://.import/pickup.png-2020cf7dc8d8c488f908d9020ee62f9d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://item/images/example/item_unknown_icon.png"
-dest_files=[ "res://.import/item_unknown_icon.png-c485b8aca4265754ff53499c7e5690eb.stex" ]
+source_file="res://item/equipment/handgun/pickup.png"
+dest_files=[ "res://.import/pickup.png-2020cf7dc8d8c488f908d9020ee62f9d.stex" ]
 
 [params]
 

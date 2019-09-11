@@ -5,10 +5,10 @@ const BulletTrail = preload("res://effects/bullet_trail/BulletTrail.tscn")
 var holder = null
 
 export(String) var item = null
-onready var metadata = Global.database["items"][item]
+onready var metadata = Global.database["items"][item] if item != null else null
 
 var cold = true
-onready var ammo = metadata["clip_size"]
+onready var ammo = metadata["clip_size"] if item != null else null
 
 enum State {
 	Holstered,
@@ -33,7 +33,11 @@ func _process(delta):
 								use()
 				else:
 					if Input.is_action_just_pressed("combat_attack") and cold:
-						reload()
+						if holder.inventory.has_item(metadata["ammo_type"]):
+							reload()
+						else:
+							# Dry fire
+							pass
 			State.Reloading:
 				pass
 
@@ -46,7 +50,7 @@ func use():
 	
 	ammo = Helpers.approach(ammo, 0, 1)
 	
-	for projectile in range(metadata["projectiles_per_shot"]):		
+	for projectile in range(metadata["projectiles_per_shot"]):
 		# Calculate the initial angle of this shot based on
 		# the angle of the equipment relative to the player
 		var angle = position.angle()
@@ -85,12 +89,16 @@ func use():
 	heat_up()
 
 func reload():
+	assert(holder.inventory.has_item(metadata["ammo_type"]))
+	
 	transition(State.Reloading)
 	holder.transition(holder.State.Reloading)
 	
 	yield(get_tree().create_timer(metadata["reload_time"]), "timeout")
 	
-	ammo = metadata["clip_size"] - ammo
+	var difference = metadata["clip_size"] - ammo
+	holder.inventory.remove_item(metadata["ammo_type"], difference)
+	
 	transition(State.Drawn)
 	holder.transition(holder.State.Aiming)
 

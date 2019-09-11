@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HandgunShotJP1.wav-63f0458bfeaed3a000ec43152286a262.sample"
+
+[deps]
+
+source_file="res://item/equipment/handgun/HandgunShotJP1.wav"
+dest_files=[ "res://.import/HandgunShotJP1.wav-63f0458bfeaed3a000ec43152286a262.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -17,6 +17,15 @@ onready var player_equipment_display : TextureRect = $MainScreen/VBoxContainer/H
 var items = Helpers.get_file_as_json("res://data/items.json")
 export(Dictionary) var contents = {}
 
+const SOUND_ZIP = [
+	"res://interface/inventory/Zip1.wav",
+	"res://interface/inventory/Zip2.wav"
+]
+const SOUND_UNZIP = [
+	"res://interface/inventory/UnZip1.wav",
+	"res://interface/inventory/UnZip2.wav"
+]
+
 signal contents_changed
 
 func _ready():
@@ -33,8 +42,10 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_inventory") and not animation_player.is_playing():
 		if visible:
 			hide()
+			AudioSystem.play(SOUND_ZIP)
 		else:
 			show()
+			AudioSystem.play(SOUND_UNZIP)
 			
 			if inventory_contents_box.get_child_count() > 0:
 				var listing = inventory_contents_box.get_child(0)
@@ -56,6 +67,12 @@ func show():
 func hide():
 	animation_player.play("hide")
 	get_tree().paused = false
+
+func has_item(key):
+	return contents.has(key)
+
+func get_item_quantity(key):
+	return contents[key] if contents.has[key] else 0
 
 func insert_item(key, quantity=1):
 	if contents.has(key):

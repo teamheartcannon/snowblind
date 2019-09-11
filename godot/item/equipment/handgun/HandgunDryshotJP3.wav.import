@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HandgunDryshotJP3.wav-2a5226facd238249262dba54db63bcc8.sample"
+
+[deps]
+
+source_file="res://item/equipment/handgun/HandgunDryshotJP3.wav"
+dest_files=[ "res://.import/HandgunDryshotJP3.wav-2a5226facd238249262dba54db63bcc8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
