@@ -10,6 +10,8 @@ func _ready():
 func play(sound):
 	if sound is Array:
 		player.stream = load(sound[int(rand_range(0, sound.size()))])
+	if sound is Dictionary:
+		pass
 	elif sound is String:
 		player.stream = load(sound)
 	

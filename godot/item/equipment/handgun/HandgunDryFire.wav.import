@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HandgunDryFire.wav-ec8280ae0b62da4fb1a118a408870c9f.sample"
+
+[deps]
+
+source_file="res://item/equipment/handgun/HandgunDryFire.wav"
+dest_files=[ "res://.import/HandgunDryFire.wav-ec8280ae0b62da4fb1a118a408870c9f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

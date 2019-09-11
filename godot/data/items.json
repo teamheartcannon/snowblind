@@ -98,8 +98,8 @@
 				"res://item/equipment/handgun/HandgunShotJP3.wav",
 				"res://item/equipment/handgun/HandgunShotJP4.wav"
 			],
-			"dry_fire": "res://item/equipment/handgun/dry_fire.wav",
-			"reload": "res://item/equipment/handgun/reload.wav"
+			"dry_fire": "res://item/equipment/handgun/HandgunDryFire.wav",
+			"reload": "res://item/equipment/handgun/HandgunReload.wav"
 		}
 	},
 	"equipment_shotgun": {
