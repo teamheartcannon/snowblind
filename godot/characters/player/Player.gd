@@ -27,9 +27,14 @@ onready var equipment = $Equipment
 
 onready var spritesheets = {
 	"body": {
+		Vector2(-1, -1): preload("res://characters/player/body/up_side.png"), # Up-left
+		Vector2.UP: preload("res://characters/player/body/up.png"),
+		Vector2(1, -1): preload("res://characters/player/body/up_side.png"), # Up-right
 		Vector2.DOWN: preload("res://characters/player/body/down.png"),
+		Vector2(-1, 1): preload("res://characters/player/body/down_side.png"), # Down-left
+		Vector2.RIGHT: preload("res://characters/player/body/side.png"),
 		Vector2(1, 1): preload("res://characters/player/body/down_side.png"), # Down-right
-		Vector2.RIGHT: preload("res://characters/player/body/side.png")
+		Vector2.LEFT: preload("res://characters/player/body/side.png")
 	},
 	"legs": {}
 }
@@ -60,6 +65,7 @@ func _process(delta):
 			handle_movement(delta)
 			handle_direction()
 			handle_interaction()
+			update_sprite_direction()
 			
 			if equipment.item != null:
 				if Input.is_action_pressed("combat_aim"):
@@ -119,10 +125,13 @@ func handle_direction():
 	
 	if input_direction != Vector2.ZERO:
 		direction = input_direction
-		
-		for key in spritesheets.keys():
-			if spritesheets[key].has(direction):
-				sprites[key].texture = spritesheets[key][direction]
+
+func update_sprite_direction():
+	sprites["body"].flip_h = false if direction.x > 0 else true
+	
+	for key in spritesheets.keys():
+		if spritesheets[key].has(direction):
+			sprites[key].texture = spritesheets[key][direction]
 
 func handle_interaction():
 	if Input.is_action_just_pressed("interact"):

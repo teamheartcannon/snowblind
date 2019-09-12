@@ -161,4 +161,3 @@ anims/stand = SubResource( 4 )
 [node name="Sprite" type="Sprite" parent="Sprites/Body"]
 texture = ExtResource( 8 )
 hframes = 12
-frame = 6
