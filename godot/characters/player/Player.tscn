@@ -1,30 +1,53 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://characters/player/Player.gd" type="Script" id=1]
-[ext_resource path="res://characters/player/player.png" type="Texture" id=2]
-[ext_resource path="res://characters/player/player_capsuleshape2d.tres" type="Shape2D" id=3]
-[ext_resource path="res://interface/inventory/Inventory.tscn" type="PackedScene" id=4]
-[ext_resource path="res://themes/debug/debug.tres" type="Theme" id=5]
-[ext_resource path="res://fonts/m3x6/m3x6.tres" type="DynamicFont" id=6]
-[ext_resource path="res://characters/player/equipment/Equipment.tscn" type="PackedScene" id=7]
-[ext_resource path="res://characters/player/equipment/Equipment.gd" type="Script" id=8]
+[ext_resource path="res://characters/player/player_capsuleshape2d.tres" type="Shape2D" id=2]
+[ext_resource path="res://interface/inventory/Inventory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://themes/debug/debug.tres" type="Theme" id=4]
+[ext_resource path="res://fonts/m3x6/m3x6.tres" type="DynamicFont" id=5]
+[ext_resource path="res://characters/player/equipment/Equipment.tscn" type="PackedScene" id=6]
+[ext_resource path="res://characters/player/equipment/Equipment.gd" type="Script" id=7]
+[ext_resource path="res://characters/player/body/down.png" type="Texture" id=8]
+
+[sub_resource type="AnimationNodeAnimation" id=1]
+animation = "stand"
+
+[sub_resource type="AnimationNodeStateMachine" id=2]
+states/stand/node = SubResource( 1 )
+states/stand/position = Vector2( 615, 124 )
+start_node = "stand"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=3]
+
+[sub_resource type="Animation" id=4]
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 11 ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )
-shape = ExtResource( 3 )
+shape = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
 [node name="InventoryLayer" type="CanvasLayer" parent="."]
 
-[node name="Inventory" parent="InventoryLayer" instance=ExtResource( 4 )]
+[node name="Inventory" parent="InventoryLayer" instance=ExtResource( 3 )]
 contents = {
 
 }
@@ -36,7 +59,7 @@ layer = 99
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 5 )
+theme = ExtResource( 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DebugLayer/DebugOverlay"]
 anchor_right = 1.0
@@ -58,7 +81,7 @@ margin_bottom = 8.0
 [node name="Label" type="Label" parent="DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/PositionDisplay"]
 margin_right = 4.0
 margin_bottom = 8.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 5 )
 text = "p"
 
 [node name="Label2" type="Label" parent="DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/PositionDisplay"]
@@ -75,7 +98,7 @@ margin_bottom = 20.0
 [node name="Label" type="Label" parent="DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/VelocityDisplay"]
 margin_right = 4.0
 margin_bottom = 8.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 5 )
 text = "v"
 
 [node name="Label2" type="Label" parent="DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/VelocityDisplay"]
@@ -92,7 +115,7 @@ margin_bottom = 32.0
 [node name="Label" type="Label" parent="DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/StateDisplay"]
 margin_right = 4.0
 margin_bottom = 8.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 5 )
 text = "s"
 
 [node name="Label2" type="Label" parent="DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/StateDisplay"]
@@ -109,7 +132,7 @@ margin_bottom = 44.0
 [node name="Label" type="Label" parent="DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/DirectionDisplay"]
 margin_right = 4.0
 margin_bottom = 8.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 5 )
 text = "d"
 
 [node name="Label2" type="Label" parent="DebugLayer/DebugOverlay/HBoxContainer/VBoxContainer/DirectionDisplay"]
@@ -118,5 +141,24 @@ margin_right = 29.0
 margin_bottom = 8.0
 text = "(0, 0)"
 
-[node name="Equipment" parent="." instance=ExtResource( 7 )]
-script = ExtResource( 8 )
+[node name="Equipment" parent="." instance=ExtResource( 6 )]
+script = ExtResource( 7 )
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Body" type="Node2D" parent="Sprites"]
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprites/Body"]
+tree_root = SubResource( 2 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+process_mode = 0
+parameters/playback = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Body"]
+anims/stand = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="Sprites/Body"]
+texture = ExtResource( 8 )
+hframes = 12
+frame = 6

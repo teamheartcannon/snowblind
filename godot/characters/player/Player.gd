@@ -25,6 +25,19 @@ export var pickup_reach = 4.0
 onready var inventory = $InventoryLayer/Inventory
 onready var equipment = $Equipment
 
+onready var spritesheets = {
+	"body": {
+		Vector2.DOWN: preload("res://characters/player/body/down.png"),
+		Vector2(1, 1): preload("res://characters/player/body/down_side.png"), # Down-right
+		Vector2.RIGHT: preload("res://characters/player/body/side.png")
+	},
+	"legs": {}
+}
+onready var sprites = {
+	"body": $Sprites/Body/Sprite,
+	"legs": null
+}
+
 enum State {
 	Normal,
 	Aiming,
@@ -106,6 +119,10 @@ func handle_direction():
 	
 	if input_direction != Vector2.ZERO:
 		direction = input_direction
+		
+		for key in spritesheets.keys():
+			if spritesheets[key].has(direction):
+				sprites[key].texture = spritesheets[key][direction]
 
 func handle_interaction():
 	if Input.is_action_just_pressed("interact"):
