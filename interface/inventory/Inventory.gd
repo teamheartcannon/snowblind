@@ -2,7 +2,7 @@ extends Control
 
 const ItemListing = preload("res://interface/inventory/item_listing/ItemListing.tscn")
 
-onready var player = get_tree().root.get_node("Game/Player")
+var player = null
 
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 
@@ -29,13 +29,7 @@ const SOUND_UNZIP = [
 signal contents_changed
 
 func _ready():
-	if inventory_contents_box.get_child_count() > 0:
-		inventory_contents_box.get_child(0).grab_focus()
-	
-	connect("contents_changed", self, "_on_Inventory_contents_changed")
-	player.connect("equipment_changed", self, "_on_Player_equipment_changed")
-	
-	update_item_list()
+	call_deferred("setup_inventory")
 
 func _process(delta):
 	# Allow the inventory to be opened and closed
@@ -59,6 +53,15 @@ func _on_Player_equipment_changed(item):
 	if Global.database["items"][item].has("images"):
 		if Global.database["items"][item]["images"].has("icon"):
 			player_equipment_display.texture = load(Global.database["items"][item]["images"]["icon"])
+
+func setup_inventory():
+	if inventory_contents_box.get_child_count() > 0:
+		inventory_contents_box.get_child(0).grab_focus()
+	
+	connect("contents_changed", self, "_on_Inventory_contents_changed")
+	player.connect("equipment_changed", self, "_on_Player_equipment_changed")
+	
+	update_item_list()
 
 func show():
 	animation_player.play("show")

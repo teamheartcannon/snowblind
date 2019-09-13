@@ -67,6 +67,7 @@ func _ready():
 	assert(move_speed > 0.0)
 	
 	equipment.holder = self
+	inventory.player = self
 
 func _process(delta):
 	match(state):
