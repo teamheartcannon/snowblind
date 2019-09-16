@@ -1,6 +1,7 @@
 extends Node2D
 
 const BulletTrail = preload("res://effects/bullet_trail/BulletTrail.tscn")
+const Enemy = preload("res://characters/enemies/Enemy.gd")
 
 var holder = null
 
@@ -94,6 +95,10 @@ func use():
 		
 		if result:
 			instance.points[1] = result["position"] - global_position
+			
+			if result["collider"] is Enemy:
+				var enemy = result["collider"] as Enemy
+				enemy.damage(33)
 		
 		add_child(instance)
 	
