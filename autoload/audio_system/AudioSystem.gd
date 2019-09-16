@@ -1,11 +1,18 @@
 extends Node
 
-const AudioPlayer = preload("res://audio/player/AudioPlayer.tscn")
+const AudioPlayer = preload("res://audio/players/standard/AudioPlayer.tscn")
+const PositionalAudioPlayer = preload("res://audio/players/positional/PositionalAudioPlayer.tscn")
 
-func play(sound):
-	var instance = AudioPlayer.instance()
+func play(sound, position=null):
+	var instance = null
 	
-	get_tree().root.add_child(instance)
-	instance.play(sound)
+	if position == null:
+		instance = AudioPlayer.instance()
+		get_tree().root.add_child(instance)
+		instance.play(sound)
+	else:
+		instance = PositionalAudioPlayer.instance()
+		get_tree().root.add_child(instance)
+		instance.play(sound, position)
 
 	return instance

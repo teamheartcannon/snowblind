@@ -5,6 +5,8 @@ const Door = preload("res://props/door/Door.tscn")
 const Pickup = preload("res://props/pickup/Pickup.tscn")
 
 func post_import(scene):
+	var metadata = []
+	
 	for layer in scene.get_children():
 		if layer is TileMap:
 			pass
@@ -12,6 +14,9 @@ func post_import(scene):
 			for object in layer.get_children():
 				var type = object.get_meta("type")
 				var instance = null
+				
+				for meta in object.get_meta_list():
+					print(meta)
 				
 				# Change the type of node that will be spawned in based on the Type property in Tiled
 				match(type):
@@ -48,5 +53,7 @@ func post_import(scene):
 					instance.set_owner(scene)
 			
 			layer.free()
+	
+	scene.set_meta("metadata", metadata)
 	
 	return scene

@@ -22,17 +22,10 @@ func change_map(key, delay=0.0):
 
 func save_map(key):
 	var file = File.new()
-	var file_path = "user://maps.json"
+	var file_path = "user://" + key + ".json"
 	file.open(file_path, File.WRITE)
 	
-	var nodes = [ map_current ]
-	var save_data = []
-	
-	while not nodes.empty():
-		var node = nodes.pop_front()
-		nodes += node.get_children()
-	
-	print(to_json(save_data))
+	print(map_current.get_meta("objects"))
 	
 	file.close()
 

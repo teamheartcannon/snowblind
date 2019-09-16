@@ -1,9 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://themes/inventory/inventory.tres" type="Theme" id=1]
 [ext_resource path="res://interface/inventory/Inventory.gd" type="Script" id=2]
-[ext_resource path="res://interface/inventory/health_display/health_display1.png" type="Texture" id=3]
+[ext_resource path="res://interface/inventory/health_display/health_display6.png" type="Texture" id=3]
 [ext_resource path="res://interface/inventory/examine_panel/ExaminePanel.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Animation" id=3]
+resource_name = "pulse"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "hide"
@@ -126,10 +142,18 @@ size_flags_vertical = 3
 margin_right = 20.0
 margin_bottom = 56.0
 
-[node name="HealthDisplay" type="TextureRect" parent="MainScreen/VBoxContainer/HBoxContainer/LeftContainer"]
+[node name="HealthDisplay" type="CenterContainer" parent="MainScreen/VBoxContainer/HBoxContainer/LeftContainer"]
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="TextureRect" type="TextureRect" parent="MainScreen/VBoxContainer/HBoxContainer/LeftContainer/HealthDisplay"]
 margin_right = 20.0
 margin_bottom = 20.0
 texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainScreen/VBoxContainer/HBoxContainer/LeftContainer/HealthDisplay"]
+autoplay = "pulse"
+anims/pulse = SubResource( 3 )
 
 [node name="EquipmentDisplay" type="TextureRect" parent="MainScreen/VBoxContainer/HBoxContainer/LeftContainer"]
 margin_top = 24.0

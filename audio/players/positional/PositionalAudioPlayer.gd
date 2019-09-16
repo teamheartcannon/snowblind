@@ -1,20 +1,20 @@
 extends Node2D
 
-var player : AudioStreamPlayer
+onready var player : AudioStreamPlayer2D = get_child(0) as AudioStreamPlayer2D
 
 func _ready():
-	player = $AudioStreamPlayer
-	
 	connect("tree_exited", self, "_on_AudioPlayer_tree_exit")
+	print(player)
 
-func play(sound):
+func play(sound, location):
+	assert(location is Vector2)
+	
 	if sound is Array:
 		player.stream = load(sound[int(rand_range(0, sound.size()))])
-	if sound is Dictionary:
-		pass
 	elif sound is String:
 		player.stream = load(sound)
 	
+	player.position = location
 	player.play()
 	
 	player.connect("finished", self, "_on_player_finished")
