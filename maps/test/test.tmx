@@ -210,7 +210,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Objects">
-  <object id="3" name="door_test_1" type="door" x="151.75" y="160" width="24.25" height="24.25">
+  <object id="3" name="door_test_1" type="door" x="0.5" y="31.5" width="24.25" height="24.25">
    <properties>
     <property name="door" value="door_test"/>
     <property name="map" value="test"/>
