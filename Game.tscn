@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://characters/player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://maps/test/test.tmx" type="PackedScene" id=3]
-[ext_resource path="res://characters/enemies/zombie/EnemyZombie.tscn" type="PackedScene" id=4]
+[ext_resource path="res://characters/enemies/zombie/EnemyZombie.tscn" type="PackedScene" id=3]
+[ext_resource path="res://maps/test/test.tmx" type="PackedScene" id=4]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,10 +12,12 @@ script = ExtResource( 1 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 
+[node name="EnemyZombie" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 49.7532, 7.34063 )
+movement_speed = 12.0
+
 [node name="Maps" type="Node2D" parent="."]
 z_index = -1
 
-[node name="test" parent="Maps" instance=ExtResource( 3 )]
-
-[node name="EnemyZombie" parent="Maps/test" instance=ExtResource( 4 )]
-position = Vector2( 49.7532, 7.34063 )
+[node name="test" parent="Maps" instance=ExtResource( 4 )]
+z_index = -2
