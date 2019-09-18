@@ -28,3 +28,17 @@ func interact(entity):
 	
 	if entity is Player:
 		entity.inventory.insert_item(item, quantity)
+
+func save():
+	var save_data = {
+		"filename": get_filename(),
+		"parent": get_parent().get_path(),
+		"position": {
+			"x": position.x,
+			"y": position.y
+		},
+		"item": item,
+		"quantity": quantity
+	}
+	
+	return save_data

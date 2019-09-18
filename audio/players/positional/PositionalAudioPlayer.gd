@@ -4,7 +4,6 @@ onready var player : AudioStreamPlayer2D = get_child(0) as AudioStreamPlayer2D
 
 func _ready():
 	connect("tree_exited", self, "_on_AudioPlayer_tree_exit")
-	print(player)
 
 func play(sound, location):
 	assert(location is Vector2)

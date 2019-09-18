@@ -7,9 +7,6 @@ onready var maps = Helpers.get_file_as_json("res://data/maps.json")
 
 onready var map_current = map_root.get_child(0)
 
-func _ready():
-	print(map_current)
-
 func change_map(key, delay=0.0):
 	assert(maps.has(key))
 	assert(delay >= 0.0)
@@ -21,20 +18,26 @@ func change_map(key, delay=0.0):
 	call_deferred("_deferred_map_change", maps[key])
 
 func save_map(key):
-	var file = File.new()
+	var save_file : File = File.new()
 	var file_path = "user://" + key + ".json"
-	file.open(file_path, File.WRITE)
+	save_file.open(file_path, File.WRITE)
 	
-	print(map_current.get_meta("objects"))
+	var save_data = []
 	
-	file.close()
+	for node in get_tree().get_nodes_in_group("persist"):
+		if node.has_method("save"):
+			save_data.push_back(node.save())
+	
+	save_file.store_string(to_json(save_data))
+	
+	save_file.close()
+	print("test")
 
 func _deferred_map_change(path):
 	if map_root.get_children().size() > 0:
 		for child in map_root.get_children():
 			child.queue_free()
 	
-	# Instantiate the new map
 	var map = load(path)
 	var instance = map.instance()
 	map_root.add_child(instance)
