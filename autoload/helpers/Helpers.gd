@@ -25,3 +25,22 @@ func get_file_as_json(path):
 	file.close()
 	
 	return json.result
+
+func get_tilemap_size(tilemap : TileMap) -> Vector2:
+	assert(tilemap is TileMap)
+	
+	var cell_bounds = tilemap.get_used_rect()
+	var cell_to_pixel = Transform2D(
+		Vector2(
+			tilemap.cell_size.x * tilemap.scale.x,
+			0
+		),
+		Vector2(
+			0,
+			tilemap.cell_size.y * tilemap.scale.y
+		),
+		Vector2.ZERO
+	)
+	var used_rect = Rect2(cell_to_pixel * cell_bounds.position, cell_to_pixel * cell_bounds.size)
+	
+	return used_rect.size

@@ -22,6 +22,8 @@ var direction : Vector2 = Vector2.DOWN
 
 export var pickup_reach = 4.0
 
+onready var camera = $Camera2D
+
 onready var inventory = $InventoryLayer/Inventory
 onready var equipment = $Equipment
 
@@ -68,6 +70,8 @@ func _ready():
 	
 	equipment.holder = self
 	inventory.player = self
+	
+	limit_camera_to_current_map()
 
 func _process(delta):
 	match(state):
@@ -136,14 +140,6 @@ func handle_direction():
 	if input_direction != Vector2.ZERO:
 		direction = input_direction
 
-func update_sprite_directions():
-	for key in sprites.keys():
-		sprites[key].flip_h = false if direction.x > 0 else true
-	
-	for key in spritesheets.keys():
-		if spritesheets[key].has(direction):
-			sprites[key].texture = spritesheets[key][direction]
-
 func handle_interaction():
 	if Input.is_action_just_pressed("interact"):
 		var direct_space_state : Physics2DDirectSpaceState = get_world_2d().direct_space_state
@@ -158,6 +154,22 @@ func handle_interaction():
 			
 			if target.has_method("interact"):
 				target.interact(self)
+
+func limit_camera_to_current_map():
+	camera.limit_top = 0
+	camera.limit_left = 0
+	
+	if SceneChanger.map_current.has_meta("size"):
+		camera.limit_right = SceneChanger.map_current.get_meta("size").x
+		camera.limit_bottom = SceneChanger.map_current.get_meta("size").y
+
+func update_sprite_directions():
+	for key in sprites.keys():
+		sprites[key].flip_h = false if direction.x > 0 else true
+	
+	for key in spritesheets.keys():
+		if spritesheets[key].has(direction):
+			sprites[key].texture = spritesheets[key][direction]
 
 func transition(new_state):
 	if move_speeds.has(new_state):

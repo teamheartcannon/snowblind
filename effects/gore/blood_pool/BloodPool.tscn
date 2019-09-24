@@ -22,7 +22,9 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=2]
 radius = 16.0
 
-[node name="BloodPool" type="Area2D"]
+[node name="BloodPool" type="Area2D" groups=[
+"persist",
+]]
 z_index = -1
 script = ExtResource( 1 )
 

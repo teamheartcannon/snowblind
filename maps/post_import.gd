@@ -5,9 +5,16 @@ const Door = preload("res://props/door/Door.tscn")
 const Pickup = preload("res://props/pickup/Pickup.tscn")
 
 func post_import(scene):
+	# Stores the size of the largest tilemap
+	var size_largest : Vector2 = Vector2.ZERO
+	
 	for layer in scene.get_children():
 		if layer is TileMap:
-			pass
+			var tilemap : TileMap = layer as TileMap
+			var size : Vector2 = Helpers.get_tilemap_size(tilemap)
+			
+			if used_rect.size > size_largest:
+				size_largest = used_rect.size
 		elif layer is Node2D:
 			for object in layer.get_children():
 				var type = object.get_meta("type")
@@ -48,5 +55,8 @@ func post_import(scene):
 					instance.set_owner(scene)
 			
 			layer.free()
+	
+	scene.set_meta("size", size_largest)
+	print(scene.get_meta("size"))
 	
 	return scene

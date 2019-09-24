@@ -31,12 +31,6 @@ func interact(entity):
 
 func save():
 	var save_data = {
-		"filename": get_filename(),
-		"parent": get_parent().get_path(),
-		"position": {
-			"x": position.x,
-			"y": position.y
-		},
 		"item": item,
 		"quantity": quantity
 	}
