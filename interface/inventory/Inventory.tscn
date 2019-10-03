@@ -1,19 +1,35 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://themes/inventory/inventory.tres" type="Theme" id=1]
 [ext_resource path="res://interface/inventory/Inventory.gd" type="Script" id=2]
-[ext_resource path="res://interface/inventory/health_display/health_monitor1.png" type="Texture" id=3]
-[ext_resource path="res://interface/inventory/health_display/health_monitor2.png" type="Texture" id=4]
-[ext_resource path="res://interface/inventory/examine_panel/ExaminePanel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://shaders/gradient/controllable_gradient.shader" type="Shader" id=3]
+[ext_resource path="res://shaders/gradient/gradient_traffic_light.png" type="Texture" id=4]
+[ext_resource path="res://interface/inventory/health_display/health_monitor3.png" type="Texture" id=5]
+[ext_resource path="res://interface/inventory/health_display/health_monitor1.png" type="Texture" id=6]
+[ext_resource path="res://interface/inventory/health_display/health_monitor2.png" type="Texture" id=7]
+[ext_resource path="res://interface/inventory/health_display/health_monitor4.png" type="Texture" id=8]
+[ext_resource path="res://interface/inventory/health_display/health_monitor5.png" type="Texture" id=9]
+[ext_resource path="res://interface/inventory/health_display/health_monitor6.png" type="Texture" id=10]
+[ext_resource path="res://interface/inventory/health_display/health_monitor7.png" type="Texture" id=11]
+[ext_resource path="res://interface/inventory/health_display/health_monitor8.png" type="Texture" id=12]
+[ext_resource path="res://interface/inventory/health_display/health_monitor9.png" type="Texture" id=13]
+[ext_resource path="res://interface/inventory/health_display/health_monitor10.png" type="Texture" id=14]
+[ext_resource path="res://interface/inventory/health_display/health_monitor11.png" type="Texture" id=15]
+[ext_resource path="res://interface/inventory/health_display/health_monitor12.png" type="Texture" id=16]
+[ext_resource path="res://interface/inventory/health_display/health_monitor13.png" type="Texture" id=17]
+[ext_resource path="res://interface/inventory/health_display/portrait.png" type="Texture" id=18]
+[ext_resource path="res://interface/inventory/examine_panel/ExaminePanel.tscn" type="PackedScene" id=19]
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/x = 1.0
+shader_param/gradient = ExtResource( 4 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "pulse"
+[sub_resource type="Animation" id=2]
 length = 1.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/path = NodePath("Background:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -22,10 +38,15 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ) ]
+"values": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 3 )
+shader_param/x = 1.0
+shader_param/gradient = ExtResource( 4 )
+
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
@@ -63,7 +84,7 @@ tracks/2/keys = {
 "values": [ true, true, false ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
@@ -103,6 +124,7 @@ tracks/2/keys = {
 
 [node name="Inventory" type="Control"]
 pause_mode = 2
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -147,15 +169,21 @@ margin_bottom = 56.0
 margin_right = 20.0
 margin_bottom = 20.0
 
-[node name="TextureRect" type="TextureRect" parent="MainScreen/VBoxContainer/HBoxContainer/LeftContainer/HealthDisplay"]
-material = SubResource( 4 )
+[node name="Background" type="TextureRect" parent="MainScreen/VBoxContainer/HBoxContainer/LeftContainer/HealthDisplay"]
+material = SubResource( 1 )
 margin_right = 20.0
 margin_bottom = 20.0
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MainScreen/VBoxContainer/HBoxContainer/LeftContainer/HealthDisplay"]
 autoplay = "pulse"
-anims/pulse = SubResource( 1 )
+anims/pulse = SubResource( 2 )
+
+[node name="Portrait" type="TextureRect" parent="MainScreen/VBoxContainer/HBoxContainer/LeftContainer/HealthDisplay"]
+margin_left = 3.0
+margin_right = 17.0
+margin_bottom = 20.0
+texture = ExtResource( 18 )
 
 [node name="EquipmentDisplay" type="TextureRect" parent="MainScreen/VBoxContainer/HBoxContainer/LeftContainer"]
 margin_top = 24.0
@@ -184,6 +212,7 @@ size_flags_vertical = 3
 alignment = 2
 
 [node name="ItemPanel" type="PanelContainer" parent="MainScreen/VBoxContainer/HBoxContainer/RightContainer"]
+material = SubResource( 5 )
 margin_right = 32.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
@@ -226,8 +255,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hide = SubResource( 2 )
-anims/show = SubResource( 3 )
+anims/hide = SubResource( 3 )
+anims/show = SubResource( 4 )
 
 [node name="EffectsLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -237,5 +266,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0 )
 
-[node name="ExaminePanel" parent="." instance=ExtResource( 5 )]
+[node name="ExaminePanel" parent="." instance=ExtResource( 19 )]
 visible = false
