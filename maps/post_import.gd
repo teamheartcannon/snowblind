@@ -11,7 +11,20 @@ func post_import(scene):
 	for layer in scene.get_children():
 		if layer is TileMap:
 			var tilemap : TileMap = layer as TileMap
-			var size : Vector2 = Helpers.get_tilemap_size(tilemap)
+			#var size : Vector2 = Helpers.get_tilemap_size(tilemap)
+			var cell_bounds = tilemap.get_used_rect()
+			var cell_to_pixel = Transform2D(
+				Vector2(
+					tilemap.cell_size.x * tilemap.scale.x,
+					0
+				),
+				Vector2(
+					0,
+					tilemap.cell_size.y * tilemap.scale.y
+				),
+				Vector2.ZERO
+			)
+			var used_rect = Rect2(cell_to_pixel * cell_bounds.position, cell_to_pixel * cell_bounds.size)
 			
 			if used_rect.size > size_largest:
 				size_largest = used_rect.size
@@ -57,6 +70,5 @@ func post_import(scene):
 			layer.free()
 	
 	scene.set_meta("size", size_largest)
-	print(scene.get_meta("size"))
 	
 	return scene

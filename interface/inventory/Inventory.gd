@@ -13,6 +13,7 @@ onready var item_preview_quantity : Label = $MainScreen/VBoxContainer/HBoxContai
 onready var item_command_panel : PanelContainer = $MainScreen/VBoxContainer/HBoxContainer/RightContainer/CommandPanel
 onready var item_commands_box : VBoxContainer = $MainScreen/VBoxContainer/HBoxContainer/RightContainer/CommandPanel/ScrollContainer/VBoxContainer
 onready var player_equipment_display : TextureRect = $MainScreen/VBoxContainer/HBoxContainer/LeftContainer/EquipmentDisplay
+onready var player_health_display = $MainScreen/VBoxContainer/HBoxContainer/LeftContainer/HealthDisplay
 
 var items = Helpers.get_file_as_json("res://data/items.json")
 export(Dictionary) var contents = {}
@@ -45,6 +46,9 @@ func _process(delta):
 				var listing = inventory_contents_box.get_child(0)
 				listing.grab_focus()
 				listing.grab_click_focus()
+	
+	if Input.is_action_just_pressed("combat_attack"):
+		player.damage(33)
 
 func _on_Inventory_contents_changed():
 	update_item_list()
@@ -54,12 +58,20 @@ func _on_Player_equipment_changed(item):
 		if Global.database["items"][item]["images"].has("icon"):
 			player_equipment_display.texture = load(Global.database["items"][item]["images"]["icon"])
 
+func _on_Player_health_changed(amount):
+	var background : TextureRect = player_health_display.get_node("Background")
+	var shader = background.material as ShaderMaterial
+	var x = amount / 100.0
+	
+	shader.set_shader_param("x", x)
+
 func setup_inventory():
 	if inventory_contents_box.get_child_count() > 0:
 		inventory_contents_box.get_child(0).grab_focus()
 	
 	connect("contents_changed", self, "_on_Inventory_contents_changed")
 	player.connect("equipment_changed", self, "_on_Player_equipment_changed")
+	player.connect("health_changed", self, "_on_Player_health_changed")
 	
 	update_item_list()
 

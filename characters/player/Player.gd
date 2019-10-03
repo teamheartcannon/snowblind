@@ -20,7 +20,8 @@ onready var move_friction = move_speed / move_stop_time
 var move_velocity : Vector2
 var direction : Vector2 = Vector2.DOWN
 
-var health = 100
+const HEALTH_MAX = 100
+var health = HEALTH_MAX
 var sanity = 100
 
 export var pickup_reach = 4.0
@@ -101,6 +102,9 @@ func _process(delta):
 
 func _on_SceneChanger_map_changed():
 	limit_camera_to_current_map()
+
+func _on_Player_death():
+	pass
 
 func handle_debugging():
 	if Input.is_action_just_pressed("ui_debug"):
@@ -204,3 +208,16 @@ func equip(item):
 	
 	# Let the rest of the game know which item the player equipped
 	emit_signal("equipment_changed", item)
+
+func heal(amount):
+	health = Helpers.approach(health, HEALTH_MAX, amount)
+	
+	emit_signal("health_changed", health)
+
+func damage(amount):
+	health = Helpers.approach(health, 0, amount)
+	
+	emit_signal("health_changed", health)
+	
+	if health == 0:
+		emit_signal("death")

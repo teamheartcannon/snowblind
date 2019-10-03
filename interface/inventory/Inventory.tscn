@@ -1,17 +1,17 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://themes/inventory/inventory.tres" type="Theme" id=1]
 [ext_resource path="res://interface/inventory/Inventory.gd" type="Script" id=2]
 [ext_resource path="res://shaders/gradient/controllable_gradient.shader" type="Shader" id=3]
 [ext_resource path="res://shaders/gradient/gradient_traffic_light.png" type="Texture" id=4]
-[ext_resource path="res://interface/inventory/health_display/health_monitor3.png" type="Texture" id=5]
+[ext_resource path="res://interface/inventory/health_display/health_monitor8.png" type="Texture" id=5]
 [ext_resource path="res://interface/inventory/health_display/health_monitor1.png" type="Texture" id=6]
 [ext_resource path="res://interface/inventory/health_display/health_monitor2.png" type="Texture" id=7]
-[ext_resource path="res://interface/inventory/health_display/health_monitor4.png" type="Texture" id=8]
-[ext_resource path="res://interface/inventory/health_display/health_monitor5.png" type="Texture" id=9]
-[ext_resource path="res://interface/inventory/health_display/health_monitor6.png" type="Texture" id=10]
-[ext_resource path="res://interface/inventory/health_display/health_monitor7.png" type="Texture" id=11]
-[ext_resource path="res://interface/inventory/health_display/health_monitor8.png" type="Texture" id=12]
+[ext_resource path="res://interface/inventory/health_display/health_monitor3.png" type="Texture" id=8]
+[ext_resource path="res://interface/inventory/health_display/health_monitor4.png" type="Texture" id=9]
+[ext_resource path="res://interface/inventory/health_display/health_monitor5.png" type="Texture" id=10]
+[ext_resource path="res://interface/inventory/health_display/health_monitor6.png" type="Texture" id=11]
+[ext_resource path="res://interface/inventory/health_display/health_monitor7.png" type="Texture" id=12]
 [ext_resource path="res://interface/inventory/health_display/health_monitor9.png" type="Texture" id=13]
 [ext_resource path="res://interface/inventory/health_display/health_monitor10.png" type="Texture" id=14]
 [ext_resource path="res://interface/inventory/health_display/health_monitor11.png" type="Texture" id=15]
@@ -38,13 +38,8 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ]
+"values": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ]
 }
-
-[sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 3 )
-shader_param/x = 1.0
-shader_param/gradient = ExtResource( 4 )
 
 [sub_resource type="Animation" id=3]
 tracks/0/type = "value"
@@ -212,7 +207,6 @@ size_flags_vertical = 3
 alignment = 2
 
 [node name="ItemPanel" type="PanelContainer" parent="MainScreen/VBoxContainer/HBoxContainer/RightContainer"]
-material = SubResource( 5 )
 margin_right = 32.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
