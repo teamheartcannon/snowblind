@@ -49,7 +49,7 @@ func save_map(key):
 				"y": node.get_global_position().y
 			}
 			
-			save_data.push_back(node.save())
+			save_data.push_back(node_data)
 		else:
 			printerr("No save method found for " + node.name)
 	

@@ -73,7 +73,7 @@
 			"res://item/commands/examine/ExamineCommand.tscn",
 			"res://item/commands/equip/EquipCommand.tscn"
 		],
-		"range": 32.0,
+		"range": 48.0,
 		"variance": 8.0,
 		"spread": 0.0,
 		"damage": {

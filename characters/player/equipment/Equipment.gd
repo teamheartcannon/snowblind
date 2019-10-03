@@ -86,7 +86,7 @@ func use():
 		var result = space_state.intersect_ray(
 			global_position,
 			global_position + destination,
-			[ self ]
+			[ self, holder ]
 		)
 		
 		# Create a trail for this projectile
@@ -99,6 +99,11 @@ func use():
 			if result["collider"] is Enemy:
 				var enemy = result["collider"] as Enemy
 				enemy.damage(33)
+			else:
+				var bullet_hole = Sprite.new()
+				bullet_hole.texture = load("res://effects/bullet_hole/bullet_hole.png")
+				bullet_hole.global_position = result["position"]
+				get_tree().root.add_child(bullet_hole)
 		
 		add_child(instance)
 	

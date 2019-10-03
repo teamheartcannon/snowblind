@@ -20,6 +20,9 @@ onready var move_friction = move_speed / move_stop_time
 var move_velocity : Vector2
 var direction : Vector2 = Vector2.DOWN
 
+var health = 100
+var sanity = 100
+
 export var pickup_reach = 4.0
 
 onready var camera = $Camera2D
@@ -62,6 +65,9 @@ enum State {
 var state = State.Normal
 
 signal equipment_changed
+signal health_changed
+signal sanity_changed
+signal death
 
 func _ready():
 	assert(move_start_time > 0.0)
@@ -72,6 +78,7 @@ func _ready():
 	inventory.player = self
 	
 	limit_camera_to_current_map()
+	SceneChanger.connect("map_changed", self, "_on_SceneChanger_map_changed")
 
 func _process(delta):
 	match(state):
@@ -91,6 +98,9 @@ func _process(delta):
 				transition(State.Normal)
 	
 	handle_debugging()
+
+func _on_SceneChanger_map_changed():
+	limit_camera_to_current_map()
 
 func handle_debugging():
 	if Input.is_action_just_pressed("ui_debug"):
