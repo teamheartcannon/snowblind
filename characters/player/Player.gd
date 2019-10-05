@@ -80,6 +80,7 @@ func _ready():
 	
 	limit_camera_to_current_map()
 	SceneChanger.connect("map_changed", self, "_on_SceneChanger_map_changed")
+	connect("death", self, "_on_Player_death")
 
 func _process(delta):
 	match(state):
@@ -104,7 +105,7 @@ func _on_SceneChanger_map_changed():
 	limit_camera_to_current_map()
 
 func _on_Player_death():
-	pass
+	get_tree().change_scene("res://interface/game_over/GameOver.tscn")
 
 func handle_debugging():
 	if Input.is_action_just_pressed("ui_debug"):

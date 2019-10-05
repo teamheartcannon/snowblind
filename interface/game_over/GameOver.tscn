@@ -30,6 +30,7 @@ alignment = 1
 margin_top = 16.0
 margin_right = 64.0
 margin_bottom = 47.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Game
 Over"
 align = 1
