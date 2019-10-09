@@ -46,9 +46,6 @@ func _process(delta):
 				var listing = inventory_contents_box.get_child(0)
 				listing.grab_focus()
 				listing.grab_click_focus()
-	
-	if Input.is_action_just_pressed("combat_attack"):
-		player.damage(33)
 
 func _on_Inventory_contents_changed():
 	update_item_list()
