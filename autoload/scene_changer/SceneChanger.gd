@@ -8,6 +8,7 @@ onready var maps = Helpers.get_file_as_json("res://data/maps.json")
 onready var map_current = map_root.get_child(0)
 
 signal map_changed
+signal scene_changed
 
 func change_map(key, delay=0.0):
 	assert(maps.has(key))

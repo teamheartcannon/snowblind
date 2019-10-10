@@ -1,0 +1,23 @@
+[gd_resource type="Theme" load_steps=8 format=2]
+
+[ext_resource path="res://fonts/m5x7/m5x7.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/m3x6/m3x6.tres" type="DynamicFont" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxFlat" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[resource]
+default_font = ExtResource( 2 )
+Button/styles/disabled = SubResource( 1 )
+Button/styles/focus = SubResource( 2 )
+Button/styles/hover = SubResource( 6 )
+Button/styles/normal = SubResource( 4 )
+Button/styles/pressed = SubResource( 5 )
+Label/fonts/font = ExtResource( 1 )
