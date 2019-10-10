@@ -9,7 +9,6 @@ func _ready():
 
 func _on_button_retry_down():
 	get_tree().change_scene("res://Game.tscn")
-	print("test")
 
 func _on_button_quit_down():
 	get_tree().quit()
