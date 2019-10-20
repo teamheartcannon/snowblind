@@ -5,7 +5,7 @@ onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var map_root = get_tree().root.get_node("/root/Game/Maps")
 onready var maps = Helpers.get_file_as_json("res://data/maps.json")
 
-onready var map_current = map_root.get_child(0)
+onready var map_current = map_root.get_child(0) if map_root != null else null
 
 signal map_changed
 signal scene_changed

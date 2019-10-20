@@ -32,30 +32,41 @@ onready var inventory = $InventoryLayer/Inventory
 onready var equipment = $Equipment
 
 onready var spritesheets = {
-	"body": {
-		Vector2(-1, -1): preload("res://characters/player/spritesheets/body/up_side.png"), # Up-left
-		Vector2.UP: preload("res://characters/player/spritesheets/body/up.png"),
-		Vector2(1, -1): preload("res://characters/player/spritesheets/body/up_side.png"), # Up-right
-		Vector2.DOWN: preload("res://characters/player/spritesheets/body/down.png"),
-		Vector2(-1, 1): preload("res://characters/player/spritesheets/body/down_side.png"), # Down-left
-		Vector2.RIGHT: preload("res://characters/player/spritesheets/body/side.png"),
-		Vector2(1, 1): preload("res://characters/player/spritesheets/body/down_side.png"), # Down-right
-		Vector2.LEFT: preload("res://characters/player/spritesheets/body/side.png")
+	"head": {
+		Vector2(-1, -1): preload("res://characters/player/body/head/up_side.png"), # Up-left
+		Vector2.UP: preload("res://characters/player/body/head/up.png"),
+		Vector2(1, -1): preload("res://characters/player/body/head/up_side.png"), # Up-right
+		Vector2.DOWN: preload("res://characters/player/body/head/down.png"),
+		Vector2(-1, 1): preload("res://characters/player/body/head/down_side.png"), # Down-left
+		Vector2.RIGHT: preload("res://characters/player/body/head/side.png"),
+		Vector2(1, 1): preload("res://characters/player/body/head/down_side.png"), # Down-right
+		Vector2.LEFT: preload("res://characters/player/body/head/side.png")
+	},
+	"torso": {
+		Vector2(-1, -1): preload("res://characters/player/body/torso/torso.png"), # Up-left
+		Vector2.UP: preload("res://characters/player/body/torso/torso.png"),
+		Vector2(1, -1): preload("res://characters/player/body/torso/torso.png"), # Up-right
+		Vector2.DOWN: preload("res://characters/player/body/torso/torso.png"),
+		Vector2(-1, 1): preload("res://characters/player/body/torso/torso.png"), # Down-left
+		Vector2.RIGHT: preload("res://characters/player/body/torso/torso.png"),
+		Vector2(1, 1): preload("res://characters/player/body/torso/torso.png"), # Down-right
+		Vector2.LEFT: preload("res://characters/player/body/torso/torso.png")
 	},
 	"legs": {
-		Vector2(-1, -1): preload("res://characters/player/spritesheets/legs/up_side.png"), # Up-left
-		Vector2.UP: preload("res://characters/player/spritesheets/legs/up.png"),
-		Vector2(1, -1): preload("res://characters/player/spritesheets/legs/up_side.png"), # Up-right
-		Vector2.DOWN: preload("res://characters/player/spritesheets/legs/down.png"),
-		Vector2(-1, 1): preload("res://characters/player/spritesheets/legs/down_side.png"), # Down-left
-		Vector2.RIGHT: preload("res://characters/player/spritesheets/legs/side.png"),
-		Vector2(1, 1): preload("res://characters/player/spritesheets/legs/down_side.png"), # Down-right
-		Vector2.LEFT: preload("res://characters/player/spritesheets/legs/side.png")
+		Vector2(-1, -1): preload("res://characters/player/body/legs/up_side.png"), # Up-left
+		Vector2.UP: preload("res://characters/player/body/legs/up.png"),
+		Vector2(1, -1): preload("res://characters/player/body/legs/up_side.png"), # Up-right
+		Vector2.DOWN: preload("res://characters/player/body/legs/down.png"),
+		Vector2(-1, 1): preload("res://characters/player/body/legs/down_side.png"), # Down-left
+		Vector2.RIGHT: preload("res://characters/player/body/legs/side.png"),
+		Vector2(1, 1): preload("res://characters/player/body/legs/down_side.png"), # Down-right
+		Vector2.LEFT: preload("res://characters/player/body/legs/side.png")
 	}
 }
-onready var sprites = {
-	"body": $Sprites/Body/Sprite,
-	"legs": $Sprites/Legs/Sprite
+onready var body_parts = {
+	"head": $Body/Head/Sprite,
+	"torso": $Body/Torso/Sprite,
+	"legs": $Body/Legs/Sprite
 }
 
 enum State {
@@ -88,7 +99,7 @@ func _process(delta):
 			handle_movement(delta)
 			handle_direction()
 			handle_interaction()
-			update_sprite_directions()
+			process_body_parts()
 			
 			if equipment.item != null:
 				if Input.is_action_pressed("combat_aim"):
@@ -178,13 +189,13 @@ func limit_camera_to_current_map():
 		camera.limit_right = SceneChanger.map_current.get_meta("size").x
 		camera.limit_bottom = SceneChanger.map_current.get_meta("size").y
 
-func update_sprite_directions():
-	for key in sprites.keys():
-		sprites[key].flip_h = false if direction.x > 0 else true
+func process_body_parts():
+	for key in body_parts.keys():
+		body_parts[key].flip_h = false if direction.x > 0 else true
 	
 	for key in spritesheets.keys():
 		if spritesheets[key].has(direction):
-			sprites[key].texture = spritesheets[key][direction]
+			body_parts[key].texture = spritesheets[key][direction]
 
 func transition(new_state):
 	if move_speeds.has(new_state):

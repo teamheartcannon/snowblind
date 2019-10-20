@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/down_side.png-659ea9686bdb8bf4ae0273923108a710.stex"
+path="res://.import/down_side.png-09cd3e1bc2e26582b197e2e6bb26dad8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/player/spritesheets/legs/down_side.png"
-dest_files=[ "res://.import/down_side.png-659ea9686bdb8bf4ae0273923108a710.stex" ]
+source_file="res://characters/player/body/head/down_side.png"
+dest_files=[ "res://.import/down_side.png-09cd3e1bc2e26582b197e2e6bb26dad8.stex" ]
 
 [params]
 

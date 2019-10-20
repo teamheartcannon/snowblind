@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/down.png-bdadbb94e913aad1b3f255cbe284ad36.stex"
+path="res://.import/up_side.png-9a7306478b459930a9067e4f21f5edb9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/player/spritesheets/legs/down.png"
-dest_files=[ "res://.import/down.png-bdadbb94e913aad1b3f255cbe284ad36.stex" ]
+source_file="res://characters/player/body/torso/up_side.png"
+dest_files=[ "res://.import/up_side.png-9a7306478b459930a9067e4f21f5edb9.stex" ]
 
 [params]
 

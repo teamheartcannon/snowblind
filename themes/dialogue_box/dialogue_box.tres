@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=4 format=2]
+
+[ext_resource path="res://fonts/m3x6/m3x6.tres" type="DynamicFont" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0, 0, 0, 0.501961 )
+
+[resource]
+default_font = ExtResource( 1 )
+Button/styles/normal = SubResource( 2 )
+PanelContainer/styles/panel = SubResource( 1 )
+label/fonts/font = null
