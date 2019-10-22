@@ -125,12 +125,12 @@ script = ExtResource( 7 )
 [node name="Head" type="Node2D" parent="Body"]
 
 [node name="Sprite" type="Sprite" parent="Body/Head"]
+z_index = 1
 texture = ExtResource( 8 )
 
 [node name="Torso" type="Node2D" parent="Body"]
 
 [node name="Sprite" type="Sprite" parent="Body/Torso"]
-z_index = -1
 texture = ExtResource( 9 )
 
 [node name="Legs" type="Node2D" parent="Body"]

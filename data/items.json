@@ -92,6 +92,7 @@
 			"preview": "res://item/equipment/handgun/icon.png"
 		},
 		"sounds": {
+			"pickup": "res://item/equipment/handgun/HandgunPickupJP.wav",
 			"attack": [
 				"res://item/equipment/handgun/HandgunShotJP1.wav",
 				"res://item/equipment/handgun/HandgunShotJP2.wav",
@@ -124,6 +125,7 @@
 		"heat": 0.0,
 		"icon": "res://item/equipment/handgun/handgun_icon.png",
 		"sounds": {
+			"pickup": "res://item/equipment/handgun/HandGunPickupJP.wav",
 			"attack": "res://item/equipment/handgun/shoot.wav",
 			"dry_fire": "res://item/equipment/handgun/dry_fire.wav",
 			"reload": "res://item/equipment/handgun/reload.wav"
@@ -134,7 +136,10 @@
 		"description": "Ammo for a handgun. Surprisingly heavy.",
 		"commands": [
 			"res://item/commands/examine/ExamineCommand.tscn"
-		]
+		],
+		"sounds": {
+			"pickup": "res://item/equipment/handgun/HandGunBulletsPickUpSnowJP.wav"
+		}
 	},
 	"ammo_shotgun": {
 		"name": "Shotgun Shell",

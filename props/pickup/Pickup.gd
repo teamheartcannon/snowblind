@@ -31,7 +31,11 @@ func interact(entity):
 	if quantity == 1:
 		instance.display_list.push_back("Picked up a " + Global.database["items"][item]["name"] + ".")
 	else:
-		instance.display_list.push_back("I got " + str(quantity) + " " + Global.database["items"][item]["name"] + "s.")
+		instance.display_list.push_back("Picked up " + str(quantity) + " " + Global.database["items"][item]["name"] + "s.")
+	
+	if Global.database["items"][item].has("sounds"):
+		if Global.database["items"][item]["sounds"].has("pickup"):
+			AudioSystem.play(Global.database["items"][item]["sounds"]["pickup"])
 	
 	get_tree().root.add_child(instance)
 	
