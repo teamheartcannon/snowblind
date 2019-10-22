@@ -110,6 +110,8 @@ func _process(delta):
 			if not Input.is_action_pressed("combat_aim"):
 				transition(State.Normal)
 	
+	#move_speed = move_speeds[typeof(state)]
+	
 	handle_debugging()
 
 func _on_SceneChanger_map_changed():

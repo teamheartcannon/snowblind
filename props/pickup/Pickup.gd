@@ -3,6 +3,7 @@ extends StaticBody2D
 class_name Pickup
 
 const Player = preload("res://characters/player/Player.gd")
+const DialogueBox = preload("res://interface/dialogue_box/DialogueBox.tscn")
 
 onready var sprite : Sprite = $Sprite
 
@@ -24,6 +25,16 @@ func _on_Pickup_picked_up():
 	queue_free()
 
 func interact(entity):
+	var instance = DialogueBox.instance()
+	
+	# Change the plurality of the pickup message based on the quantity
+	if quantity == 1:
+		instance.display_list.push_back("Picked up a " + Global.database["items"][item]["name"] + ".")
+	else:
+		instance.display_list.push_back("I got " + str(quantity) + " " + Global.database["items"][item]["name"] + "s.")
+	
+	get_tree().root.add_child(instance)
+	
 	emit_signal("picked_up")
 	
 	if entity is Player:
