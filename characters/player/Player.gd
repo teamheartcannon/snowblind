@@ -52,6 +52,16 @@ onready var spritesheets = {
 		Vector2(1, 1): preload("res://characters/player/body/torso/torso.png"), # Down-right
 		Vector2.LEFT: preload("res://characters/player/body/torso/torso.png")
 	},
+	"arm_left": {
+		Vector2(-1, -1): preload("res://characters/player/body/arms/empty/left/up_side.png"), # Up-left
+		Vector2.UP: preload("res://characters/player/body/arms/empty/left/up.png"),
+		Vector2(1, -1): preload("res://characters/player/body/arms/empty/left/up_side.png"), # Up-right
+		Vector2.DOWN: preload("res://characters/player/body/arms/empty/left/down.png"),
+		Vector2(-1, 1): preload("res://characters/player/body/arms/empty/left/down_side.png"), # Down-left
+		Vector2.RIGHT: preload("res://characters/player/body/arms/empty/left/side.png"),
+		Vector2(1, 1): preload("res://characters/player/body/arms/empty/left/down_side.png"), # Down-right
+		Vector2.LEFT: preload("res://characters/player/body/arms/empty/left/side.png")
+	},
 	"legs": {
 		Vector2(-1, -1): preload("res://characters/player/body/legs/up_side.png"), # Up-left
 		Vector2.UP: preload("res://characters/player/body/legs/up.png"),
@@ -66,6 +76,7 @@ onready var spritesheets = {
 onready var body_parts = {
 	"head": $Body/Head/Sprite,
 	"torso": $Body/Torso/Sprite,
+	"arm_left": $Body/Arms/Left/Sprite,
 	"legs": $Body/Legs/Sprite
 }
 

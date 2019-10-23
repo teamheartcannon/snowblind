@@ -137,3 +137,11 @@ texture = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="Body/Legs"]
 texture = ExtResource( 10 )
+
+[node name="Arms" type="Node2D" parent="Body"]
+
+[node name="Left" type="Node2D" parent="Body/Arms"]
+
+[node name="Sprite" type="Sprite" parent="Body/Arms/Left"]
+
+[node name="Right" type="Node2D" parent="Body/Arms"]
