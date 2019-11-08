@@ -9,7 +9,10 @@
 	},
 	"tool_radio": {
 		"name": "Radio",
-		"description": "The two-way standard station radio. It seems to be malfunctioning.",
+		"description": "The standard two-way station radio. It seems to be malfunctioning.",
+		"images": {
+			"pickup": "res://item/tools/radio/pickup.png"
+		},
 		"commands": [
 			"res://item/commands/examine/ExamineCommand.tscn"
 		]

@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_importer"
+type="PackedScene"
+path="res://.import/cabin_interior.tmx-93b1322d0c879e6392d89d8fce487db4.scn"
+
+[deps]
+
+source_file="res://maps/cabin_interior/cabin_interior.tmx"
+dest_files=[ "res://.import/cabin_interior.tmx-93b1322d0c879e6392d89d8fce487db4.scn" ]
+
+[params]
+
+custom_properties=true
+tile_metadata=true
+uv_clip=true
+image_flags=0
+collision_layer=1
+embed_internal_images=true
+save_tiled_properties=true
+add_background=true
+post_import_script="res://maps/post_import.gd"

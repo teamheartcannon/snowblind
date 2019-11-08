@@ -1,4 +1,5 @@
 {
 	"default": "res://maps/default/default.tmx",
-	"test": "res://maps/test/test.tmx"
+	"test": "res://maps/test/test.tmx",
+	"cabin_interior": "res://maps/cabin_interior/cabin_interior.tmx"
 }
